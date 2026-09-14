@@ -42,6 +42,37 @@ Platform kajian **Marxisme Ilmiah** dan **Sosialisme Ilmiah** dengan analisis st
 - **Cache-buster `?v=16`** di seluruh halaman
 - Semua fitur v11 tetap: hero slider, slider YouTube, AdSense, FAQ 30, forum lengkap
 
+## Baru di v17 (tata letak majalah)
+- **`css/magazine.css`** + **`js/magazine.js`** baru (berkas tambahan, dimuat setelah `style.css`/`main.js`) — tidak mengubah aturan lama
+- **Main Menu**: menu utama di header dengan **dropdown** (Beranda, Perempuan, Forum) dan **penanda halaman aktif**; mendukung hover, klik, panah bawah, dan Escape
+- **Mega Links Konten**: panel mega menu lebar dengan **4 tab** dan **16 kolom** berisi 100 tautan ke bab/bagian nyata; muncul saat menu di-hover/di-klik; di mobile berupa **nav akordeon bergrup**
+- **Top Featured Area**: 1 berita utama besar + 3 kartu pendukung + chip “baca juga”, memakai konten halaman itu sendiri. Varian: `split` (berita besar di kiri) dan `wide` (berita besar penuh, 3 kartu sejajar)
+- **Sidebar Area**: **sticky di desktop**, **turun di bawah konten saat <=1040px**. Isi berbeda per halaman: Daftar Isi Halaman (dengan **scrollspy**), Terpopuler, Terbaru, Kategori, Kutipan Pilihan, Jelajahi Topik, dan **unit iklan sidebar** (slot unik `rwp-*-sidebar`)
+- **Magazine Widget Area**: strip widget 4 kartu di atas footer
+- **Author Profile Area**: kotak profil dengan avatar, nama, peran, deskripsi, tautan sosial — Redaksi RWP / Tim Teori & Metode / Tim Analisis & Riset / Tim Media & Arsip
+- **Share + Print**: WhatsApp, Facebook, X/Twitter, Telegram, LinkedIn, Salin tautan (`navigator.clipboard` + fallback), dan Cetak halaman (`window.print()`) di 9/9 halaman
+- **Gaya cetak khusus** (`@media print`): menu, mega panel, sidebar, widget, iklan, tombol, dan bilah berbagi **tidak ikut tercetak**; muncul header cetak berisi judul dokumen + URL sumber
+- **Footer multi-kolom**: Navigasi, Sumber Belajar, Redaksi & Kredit + kolom brand
+- **Cache-buster `?v=17`** di seluruh halaman (tanpa sisa `?v=16`)
+- Semua fitur lama utuh: hero slider, slider YouTube, forum, FAQ 30, Bab 16 Kerja Reproduksi Sosial, galeri lightbox + filter, unit AdSense (auto + in-feed + multiplex), `ads.txt`, `netlify.toml`, `robots.txt`, `sitemap.xml`
+
+### Susunan area per halaman
+| Halaman | Tema unggulan | Varian | Sidebar (urut) | Widget | Author profile |
+|---|---|---|---|---|---|
+| `index.html` | Beranda / laporan utama | split | Daftar Isi, Terpopuler, Iklan, Terbaru, Kategori | Terbaru, Kutipan, Jelajahi, Kategori | Redaksi RWP |
+| `marxisme.html` | Teori & Metode | wide | Daftar Isi, Terbaru, Iklan, Kutipan, Jelajahi | Jelajahi, Terbaru, Terpopuler, Kategori | Tim Teori & Metode |
+| `sosialisme.html` | Sosialisme (ekonomi perawatan) | split | Daftar Isi, Kutipan, Iklan, Terpopuler, Kategori | Terpopuler, Kategori, Terbaru, Kutipan | Tim Teori & Metode |
+| `analisa-papua.html` | Laporan khusus Grasberg | wide | Daftar Isi, Terpopuler, Iklan, Terbaru, Jelajahi | Terpopuler, Terbaru, Jelajahi, Kategori | Tim Analisis & Riset |
+| `sosialisme-papua.html` | Program (kerja reproduksi) | split, **sidebar kiri** | Daftar Isi, Kategori, Iklan, Terpopuler, Kutipan | Kategori, Terpopuler, Terbaru, Jelajahi | Tim Analisis & Riset |
+| `anti-seksisme-patriarki.html` | Dossier perempuan Papua | wide | Daftar Isi, Jelajahi, Iklan, Terpopuler, Kutipan | Kutipan, Jelajahi, Terpopuler, Kategori | Tim Media & Arsip |
+| `galeri-foto.html` | Galeri utama | split | Daftar Isi, Kategori, Iklan, Terbaru, Jelajahi | Kategori, Terbaru, Terpopuler, Jelajahi | Tim Media & Arsip |
+| `faq.html` | Pusat bantuan 30 pertanyaan | wide | Daftar Isi, Terpopuler, Iklan, Kutipan, Jelajahi | Terpopuler, Kutipan, Terbaru, Jelajahi | Redaksi RWP |
+| `forum.html` | Ruang publik diskusi | split | Daftar Isi, Terbaru, Iklan, Terpopuler, Kategori | Terbaru, Kategori, Terpopuler, Kutipan | Redaksi RWP |
+
+### Verifikasi v17
+- Uji tata letak majalah: mega menu 100 tautan tanpa tautan menggantung, sidebar menjadi kolom di desktop dan menumpuk di mobile, tombol berbagi (5 kanal + salin tautan), tombol cetak memicu `window.print()` dan gaya cetak menyembunyikan menu/sidebar/iklan/footer
+- Tanpa scroll horizontal di 390px dan 1440px pada 9/9 halaman, dan pada sweep 1024–1920px
+
 ## Fitur
 - Tema merah-hitam-emas dengan aksen pita Bintang Kejora
 - Mode gelap/terang (tersimpan di localStorage)
@@ -68,7 +99,9 @@ ruang-west-papua_v12/
 ├── galeri-foto.html           ← baru di v12 (galeri foto perjuangan)
 ├── ads.txt                       ← deklarasi penjual resmi AdSense
 ├── css/style.css
+├── css/magazine.css             ← tata letak majalah (v17)
 ├── js/main.js
+├── js/magazine.js              ← menu/berbagi/cetak/scrollspy (v17)
 ├── images/                       ← 16 aset (8 lama + 8 foto galeri baru)
 ├── netlify.toml
 ├── README.md
