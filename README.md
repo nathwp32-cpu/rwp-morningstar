@@ -33,6 +33,15 @@ Platform kajian **Marxisme Ilmiah** dan **Sosialisme Ilmiah** dengan analisis st
 - **Aturan cetak**: `.sw.sw-rel` disembunyikan saat dicetak (sidebar memang tidak dicetak), jadi gaya cetak selektif tetap rapi.
 - **Cache-buster dinaikkan ke `?v=19`** di seluruh halaman (tanpa sisa `?v=18`).
 
+## Baru di v20 — Mode Gelap Otomatis (prefers-color-scheme)
+- **Seluruh 9 halaman otomatis mengikuti pengaturan tema sistem pengguna** lewat `@media (prefers-color-scheme: dark)` — tanpa perlu tombol dan tanpa menyimpan preferensi baru.
+- **Atribut `<html data-theme="light">` yang sebelumnya di-hardcode dilepas.** Tema awal kini ditentukan preferensi sistem; **skrip pre-paint** kecil di `<head>` hanya *membaca* kunci `localStorage` yang sudah ada agar pilihan manual tidak berkedip saat halaman dimuat.
+- **Toggle manual tetap berfungsi dan selalu menang atas preferensi sistem.** Blok otomatis dibatasi dengan `html:not([data-theme])`, sehingga: tanpa pilihan manual → ikut sistem; setelah menekan tombol → pilihan manual yang berlaku, di kedua arah. Ikon tombol mengikuti **tema efektif**, dan ikut diperbarui saat pengaturan sistem berubah (`matchMedia` listener).
+- **Cakupan komponen:** header & top strip, main menu, dropdown, mega menu, area unggulan (Top Featured), kartu artikel, blok Artikel Terkait besar, widget sidebar termasuk widget ringkas 3 kartu, sidebar sticky, artikel (h2/h3/blockquote), tabel, glosarium, callout, kutipan, timeline, FAQ accordion, forum (form, post, chip, balasan), galeri + lightbox, footer, profil penulis, bilah berbagi & tombol cetak, serta unit iklan AdSense — semua berganti ke palet gelap merah–hitam–emas.
+- **Kontras teks aksen diperbaiki:** seluruh warna teks yang memakai `var(--red)` (#c0392b) di latar gelap diganti aksen merah lebih terang **#ff7a63** (≈5,1:1). Ditambah restorasi otomatis untuk teks di atas permukaan merah/emas (tombol, `.nav a.active`, `.menu-item>a.menu-link.active`, chip aktif) agar tidak ikut tertimpa aturan `a{color:…}`, serta angka dekoratif `.card .num` yang kini memakai goresan `-webkit-text-stroke:1px #ff7a63`.
+- **Hasil audit kontras WCAG di 9 halaman × 390px & 1440px: 0 pelanggaran** dari **16.489 node teks** (target ≥4,5:1 untuk teks isi). Mode gelap juga diuji tanpa scroll horizontal (390/1440px, plus sapuan 1024–1920px) dengan **0 page error**.
+- **Cache-buster dinaikkan ke `?v=20`** di seluruh halaman (tanpa sisa `?v=19`).
+
 ## Baru di v12
 - **Halaman baru: `galeri-foto.html`** — **Galeri Foto Perjuangan Papua** (7 bagian, 12 foto, ±46 KB) yang menata arsip visual perjuangan Papua ke dalam **enam kategori** (Sejarah, Demonstrasi, Perempuan, Tanah & Sumber Daya, Budaya, Pendidikan):
   1. **Mengapa arsip visual penting** — gambar sebagai metode, dan arsip sebagai medan kontestasi + kotak **Catatan Etika Visual**

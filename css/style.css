@@ -385,3 +385,171 @@ article.article .ad-box.ad-multiplex{width:auto;margin:2.2rem 0 2.6rem}
 @media(max-width:1240px){.nav a{font-size:.66rem;padding:.3rem .28rem}.brand-name{font-size:1.04rem}.brand-flag{width:37px;height:26px}.icon-btn{width:34px;height:34px;font-size:.9rem}}
 @media(max-width:1140px){.nav a{font-size:.62rem;padding:.26rem .24rem}.header-actions{gap:.3rem}.icon-btn{width:32px;height:32px;font-size:.85rem}}
 @media(max-width:1050px){.nav a{font-size:.58rem;padding:.24rem .2rem}.brand-name{font-size:.96rem}.brand-tag{display:none}.brand-flag{width:34px;height:24px}}
+/* ==== MODE GELAP OTOMATIS (prefers-color-scheme: dark) :: v20 :: jangan dihapus ==== */
+/* Otomatis mengikuti preferensi sistem HANYA bila pengguna belum memilih
+   tema manual (tanpa atribut data-theme). Bila ada pilihan manual, aturan
+   [data-theme=dark] di bawah yang berlaku — manual selalu menang. */
+@media (prefers-color-scheme: dark){
+  html:not([data-theme]){--white:#101014;--white-2:#16161c;--ink:#e9e4da;--text:#c9c4ba;--muted:#8b857c;--line:rgba(255,255,255,.1);--shadow:0 10px 30px rgba(0,0,0,.5);--shadow-lg:0 24px 60px rgba(0,0,0,.6)}
+  html:not([data-theme]) .kejora-bar{background:linear-gradient(90deg,var(--red) 0 33%,#fff 33% 66%,var(--red) 66% 100%)}
+  html:not([data-theme]) .card{background:var(--black-2)}
+  html:not([data-theme]) .tl-year{background:var(--red);color:#fff}
+  html:not([data-theme]) .analysis-item{background:var(--black-2)}
+  html:not([data-theme]) .gloss-item{background:var(--black-2)}
+  html:not([data-theme]) .article blockquote{background:var(--black-2)}
+  html:not([data-theme]) .table-wrap table tr:nth-child(even) td{background:var(--black-2)}
+  html:not([data-theme]) .article table tr:nth-child(even) td{background:var(--black-2)}
+  html:not([data-theme]) .article .toc{background:var(--black-2)}
+  html:not([data-theme]) .article .next-prev a{background:var(--black-2)}
+  html:not([data-theme]) .faq-item{background:var(--black-2)}
+  html:not([data-theme]) .faq-num{background:var(--red);color:#fff}
+  html:not([data-theme]) .forum-form{background:var(--black-2)}
+  html:not([data-theme]) .forum-field input,html:not([data-theme]) .forum-field select,html:not([data-theme]) .forum-field textarea{background:var(--black-3);color:var(--text)}
+  html:not([data-theme]) .f-chip{background:var(--black-2)}
+  html:not([data-theme]) .forum-empty{background:var(--black-2)}
+  html:not([data-theme]) .forum-post{background:var(--black-2)}
+  html:not([data-theme]) .reading-list li em{color:var(--white)}
+  html:not([data-theme]) .reply-form{background:var(--black-2)}
+  html:not([data-theme]) .fp-reply{background:var(--black-3)}
+  html:not([data-theme]) .fp-tag{background:#3a2f12;color:#e6cd84;border-color:#5c4a1c}
+  html:not([data-theme]) .ti-link{background:var(--black-3)}
+  html:not([data-theme]) .az-index h3{color:var(--gold-light)}
+  html:not([data-theme]) .forum-sort{background:var(--black-3);color:var(--text)}
+  html:not([data-theme]) .ad-box{background:var(--black-2)}
+  html:not([data-theme]) .yt-slider{background:var(--black-2)}
+  html:not([data-theme]) .yt-nav{background:var(--black-3);color:#e9e4da}
+  html:not([data-theme]) .gal-card{background:var(--black-2)}
+  /* ---- kontras: aksen merah utk TEKS di latar gelap ---- */
+  html:not([data-theme]) a{color:#ff7a63}
+  html:not([data-theme]) .hero h1 .red-word{color:#ff7a63}
+  html:not([data-theme]) .sec-head .eyebrow{color:#ff7a63}
+  html:not([data-theme]) .tag{color:#ff7a63}
+  html:not([data-theme]) .slide-content h1 .red-word{color:#ff7a63}
+  html:not([data-theme]) .page-hero h1 .red-word{color:#ff7a63}
+  html:not([data-theme]) .article .tag{color:#ff7a63}
+  html:not([data-theme]) .article .toc a{color:#ff7a63}
+  html:not([data-theme]) .forum-count{color:#ff7a63}
+  html:not([data-theme]) .f-chip:hover{color:#ff7a63}
+  html:not([data-theme]) .fp-topic{color:#ff7a63}
+  html:not([data-theme]) .reply-form .btn-ghost:hover{color:#ff7a63}
+  html:not([data-theme]) .fp-reply-del:hover{color:#ff7a63}
+  html:not([data-theme]) .ti-link:hover{color:#ff7a63}
+  html:not([data-theme]) .az-index h3{color:#ff7a63}
+  html:not([data-theme]) .yt-head .eyebrow{color:#ff7a63}
+  html:not([data-theme]) .yt-head h2 .red-word{color:#ff7a63}
+  html:not([data-theme]) .yt-badge{color:#ff7a63}
+  html:not([data-theme]) .yt-meta h3 a.yt-title:hover{color:#ff7a63}
+  html:not([data-theme]) .yt-btn:hover{color:#ff7a63}
+  html:not([data-theme]) .yt-note a{color:#ff7a63}
+  html:not([data-theme]) .tl-open{color:#ff7a63}
+  /* ---- pulihkan teks di atas permukaan merah/emas agar tak ditimpa a{color} ---- */
+  html:not([data-theme]) .nav a.active{color:var(--white)}
+  html:not([data-theme]) .nav-cta{color:#fff!important}
+  html:not([data-theme]) .icon-btn:hover{color:#fff}
+  html:not([data-theme]) .btn-primary{color:#fff}
+  html:not([data-theme]) .btn-primary:hover{color:#fff}
+  html:not([data-theme]) .btn-gold{color:var(--black)}
+  html:not([data-theme]) .btn-gold:hover{color:var(--black)}
+  html:not([data-theme]) .card .card-icon{color:#fff}
+  html:not([data-theme]) #scrollTop{color:#fff}
+  html:not([data-theme]) #scrollTop:hover{color:var(--black)}
+  html:not([data-theme]) .analysis-item .ai-ic{color:#fff}
+  html:not([data-theme]) .article .callout{color:#fff}
+  html:not([data-theme]) .article .callout.gold{color:var(--black)}
+  html:not([data-theme]) .faq-icon{color:#fff}
+  html:not([data-theme]) .faq-q.open .faq-icon{color:var(--black)}
+  html:not([data-theme]) .f-chip.active{color:#fff}
+  html:not([data-theme]) .fp-avatar{color:#fff}
+  html:not([data-theme]) .fp-del:hover{color:#fff}
+  html:not([data-theme]) .fp-reply-avatar{color:var(--black)}
+  html:not([data-theme]) @media(max-width:680px){.fp-reply-toggle{font-size:.7rem}}
+/* ===== v7 forum: badge terbaru{color:#fff}
+  html:not([data-theme]) tag{color:#fff}
+  html:not([data-theme]) filter tag{color:#fff}
+  html:not([data-theme]) ekspor ===== */
+.fp-new-badge{color:#fff}
+  html:not([data-theme]) .fp-tag{color:#6d5417}
+  html:not([data-theme]) .fp-pin-badge{color:var(--black)}
+  html:not([data-theme]) .yt-play{color:#fff}
+  html:not([data-theme]) .yt-live{color:var(--black)}
+  html:not([data-theme]) .yt-nav:hover{color:#fff}
+  html:not([data-theme]) .yt-btn[aria-pressed="true"]{color:#fff}
+  html:not([data-theme]) .gal-cat{color:#fff}
+  /* ---- pelengkap (ditulis TERAKHIR agar menang atas pulih-permukaan) ---- */
+  html:not([data-theme]) .nav a.active{color:#fff}
+  html:not([data-theme]) .menu-item>a.menu-link.active{color:#fff}
+  html:not([data-theme]) .tl-year{background:var(--red);color:#fff}
+  html:not([data-theme]) .faq-num{background:var(--red);color:#fff}
+  html:not([data-theme]) .brand-name{color:#f5f2ec}
+  html:not([data-theme]) .mobile-nav a{color:#f5f2ec}
+  html:not([data-theme]) .reading-list li em{color:#f5f2ec}
+  html:not([data-theme]) .hero-stat b,html:not([data-theme]) .hero-stats .stat b{color:#fff}
+  html:not([data-theme]) .card .num{color:transparent;-webkit-text-stroke:1px #ff7a63}
+  html:not([data-theme]) .f-chip.active,html:not([data-theme]) .f-chip.active .tag,html:not([data-theme]) .f-chip.active span{color:#fff}
+}
+/* ---- bentuk manual (data-theme=dark) ---- */
+[data-theme=dark] a{color:#ff7a63}
+[data-theme=dark] .hero h1 .red-word{color:#ff7a63}
+[data-theme=dark] .sec-head .eyebrow{color:#ff7a63}
+[data-theme=dark] .tag{color:#ff7a63}
+[data-theme=dark] .slide-content h1 .red-word{color:#ff7a63}
+[data-theme=dark] .page-hero h1 .red-word{color:#ff7a63}
+[data-theme=dark] .article .tag{color:#ff7a63}
+[data-theme=dark] .article .toc a{color:#ff7a63}
+[data-theme=dark] .forum-count{color:#ff7a63}
+[data-theme=dark] .f-chip:hover{color:#ff7a63}
+[data-theme=dark] .fp-topic{color:#ff7a63}
+[data-theme=dark] .reply-form .btn-ghost:hover{color:#ff7a63}
+[data-theme=dark] .fp-reply-del:hover{color:#ff7a63}
+[data-theme=dark] .ti-link:hover{color:#ff7a63}
+[data-theme=dark] .az-index h3{color:#ff7a63}
+[data-theme=dark] .yt-head .eyebrow{color:#ff7a63}
+[data-theme=dark] .yt-head h2 .red-word{color:#ff7a63}
+[data-theme=dark] .yt-badge{color:#ff7a63}
+[data-theme=dark] .yt-meta h3 a.yt-title:hover{color:#ff7a63}
+[data-theme=dark] .yt-btn:hover{color:#ff7a63}
+[data-theme=dark] .yt-note a{color:#ff7a63}
+[data-theme=dark] .tl-open{color:#ff7a63}
+[data-theme=dark] .nav a.active{color:var(--white)}
+[data-theme=dark] .nav-cta{color:#fff!important}
+[data-theme=dark] .icon-btn:hover{color:#fff}
+[data-theme=dark] .btn-primary{color:#fff}
+[data-theme=dark] .btn-primary:hover{color:#fff}
+[data-theme=dark] .btn-gold{color:var(--black)}
+[data-theme=dark] .btn-gold:hover{color:var(--black)}
+[data-theme=dark] .card .card-icon{color:#fff}
+[data-theme=dark] #scrollTop{color:#fff}
+[data-theme=dark] #scrollTop:hover{color:var(--black)}
+[data-theme=dark] .analysis-item .ai-ic{color:#fff}
+[data-theme=dark] .article .callout{color:#fff}
+[data-theme=dark] .article .callout.gold{color:var(--black)}
+[data-theme=dark] .faq-icon{color:#fff}
+[data-theme=dark] .faq-q.open .faq-icon{color:var(--black)}
+[data-theme=dark] .f-chip.active{color:#fff}
+[data-theme=dark] .fp-avatar{color:#fff}
+[data-theme=dark] .fp-del:hover{color:#fff}
+[data-theme=dark] .fp-reply-avatar{color:var(--black)}
+[data-theme=dark] @media(max-width:680px){.fp-reply-toggle{font-size:.7rem}}
+/* ===== v7 forum: badge terbaru{color:#fff}
+[data-theme=dark] tag{color:#fff}
+[data-theme=dark] filter tag{color:#fff}
+[data-theme=dark] ekspor ===== */
+.fp-new-badge{color:#fff}
+[data-theme=dark] .fp-tag{color:#6d5417}
+[data-theme=dark] .fp-pin-badge{color:var(--black)}
+[data-theme=dark] .yt-play{color:#fff}
+[data-theme=dark] .yt-live{color:var(--black)}
+[data-theme=dark] .yt-nav:hover{color:#fff}
+[data-theme=dark] .yt-btn[aria-pressed="true"]{color:#fff}
+[data-theme=dark] .gal-cat{color:#fff}
+[data-theme=dark] .nav a.active{color:#fff}
+[data-theme=dark] .menu-item>a.menu-link.active{color:#fff}
+[data-theme=dark] .tl-year{background:var(--red);color:#fff}
+[data-theme=dark] .faq-num{background:var(--red);color:#fff}
+[data-theme=dark] .brand-name{color:#f5f2ec}
+[data-theme=dark] .mobile-nav a{color:#f5f2ec}
+[data-theme=dark] .reading-list li em{color:#f5f2ec}
+[data-theme=dark] .hero-stat b,[data-theme=dark] .hero-stats .stat b{color:#fff}
+[data-theme=dark] .card .num{color:transparent;-webkit-text-stroke:1px #ff7a63}
+[data-theme=dark] .f-chip.active,[data-theme=dark] .f-chip.active .tag,[data-theme=dark] .f-chip.active span{color:#fff}
+/* ==== AKHIR MODE GELAP OTOMATIS ==== */

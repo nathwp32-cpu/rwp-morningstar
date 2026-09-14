@@ -422,3 +422,103 @@
 @media(max-width:680px){.swr-title{font-size:.87rem}.sw-rel-note{font-size:.74rem}}
 /* cetak: .mag-side sudah disembunyikan; aturan ini menjaga bila sidebar ikut dirender */
 @media print{.sw.sw-rel{display:none!important}}
+/* ==== MODE GELAP OTOMATIS (prefers-color-scheme: dark) :: v20 :: jangan dihapus ==== */
+/* Otomatis mengikuti preferensi sistem HANYA bila pengguna belum memilih
+   tema manual (tanpa atribut data-theme). Bila ada pilihan manual, aturan
+   [data-theme=dark] di bawah yang berlaku — manual selalu menang. */
+@media (prefers-color-scheme: dark){
+  html:not([data-theme]) .mf-card{background:var(--black-2)}
+  html:not([data-theme]) .mf-chip{background:var(--black-2)}
+  html:not([data-theme]) .sw{background:var(--black-2)}
+  html:not([data-theme]) .mw-card{background:var(--black-2)}
+  html:not([data-theme]) .share-bar{background:var(--black-2)}
+  html:not([data-theme]) .sb-btn{background:var(--black-3);color:#e9e4da}
+  html:not([data-theme]) .rel-sub b{color:var(--gold-light)}
+  html:not([data-theme]) .rel-card{background:var(--black-2)}
+  html:not([data-theme]) .rel-card:hover h3{color:var(--gold)}
+  html:not([data-theme]) .rel-badge{background:#c0392b33;color:var(--gold-light)}
+  html:not([data-theme]) .sw-rel-note b{color:var(--gold-light)}
+  html:not([data-theme]) .swr-link:hover .swr-title{color:var(--gold)}
+  html:not([data-theme]) .swr-badge{background:#c0392b33;color:var(--gold-light)}
+  /* ---- kontras: aksen merah utk TEKS di latar gelap ---- */
+  html:not([data-theme]) .mega-col h4{color:#ff7a63}
+  html:not([data-theme]) .mag-featured .mf-label{color:#ff7a63}
+  html:not([data-theme]) .mf-card .mf-tag{color:#ff7a63}
+  html:not([data-theme]) .mf-card:hover h4{color:#ff7a63}
+  html:not([data-theme]) .mf-chip:hover{color:#ff7a63}
+  html:not([data-theme]) .mag-side .side-head{color:#ff7a63}
+  html:not([data-theme]) .sw-toc ol a:hover{color:#ff7a63}
+  html:not([data-theme]) .sw-rank a:hover{color:#ff7a63}
+  html:not([data-theme]) .sw-links a:hover{color:#ff7a63}
+  html:not([data-theme]) .mw-card a:hover{color:#ff7a63}
+  html:not([data-theme]) .share-bar .sb-label{color:#ff7a63}
+  html:not([data-theme]) .rel-eyebrow{color:#ff7a63}
+  html:not([data-theme]) .rel-card:hover h3{color:#ff7a63}
+  html:not([data-theme]) .rel-badge{color:#ff7a63}
+  html:not([data-theme]) .rel-arrow{color:#ff7a63}
+  html:not([data-theme]) .sw-rel-note b{color:#ff7a63}
+  html:not([data-theme]) .swr-link:hover .swr-title{color:#ff7a63}
+  html:not([data-theme]) .swr-badge{color:#ff7a63}
+  /* ---- pulihkan teks di atas permukaan merah/emas agar tak ditimpa a{color} ---- */
+  html:not([data-theme]) .menu-item>a.menu-link.active{color:var(--white)}
+  html:not([data-theme]) .menu-drop a:hover{color:#fff}
+  html:not([data-theme]) .mega-top .mg-all:hover{color:var(--black)}
+  html:not([data-theme]) .mf-lead .mf-kicker{color:#fff}
+  html:not([data-theme]) .sw-toc ol a.cur{color:#fff}
+  html:not([data-theme]) .mw-card .mw-ic{color:#fff}
+  html:not([data-theme]) .ap-avatar{color:#fff}
+  html:not([data-theme]) .ap-social a:hover{color:#fff}
+  html:not([data-theme]) .sb-btn.cp:hover{color:var(--black)}
+  html:not([data-theme]) .sb-btn.copied{color:var(--black)}
+  /* ---- pelengkap (ditulis TERAKHIR agar menang atas pulih-permukaan) ---- */
+  html:not([data-theme]) .nav a.active{color:#fff}
+  html:not([data-theme]) .menu-item>a.menu-link.active{color:#fff}
+  html:not([data-theme]) .tl-year{background:var(--red);color:#fff}
+  html:not([data-theme]) .faq-num{background:var(--red);color:#fff}
+  html:not([data-theme]) .brand-name{color:#f5f2ec}
+  html:not([data-theme]) .mobile-nav a{color:#f5f2ec}
+  html:not([data-theme]) .reading-list li em{color:#f5f2ec}
+  html:not([data-theme]) .hero-stat b,html:not([data-theme]) .hero-stats .stat b{color:#fff}
+  html:not([data-theme]) .card .num{color:transparent;-webkit-text-stroke:1px #ff7a63}
+  html:not([data-theme]) .f-chip.active,html:not([data-theme]) .f-chip.active .tag,html:not([data-theme]) .f-chip.active span{color:#fff}
+}
+/* ---- bentuk manual (data-theme=dark) ---- */
+[data-theme=dark] .mega-col h4{color:#ff7a63}
+[data-theme=dark] .mag-featured .mf-label{color:#ff7a63}
+[data-theme=dark] .mf-card .mf-tag{color:#ff7a63}
+[data-theme=dark] .mf-card:hover h4{color:#ff7a63}
+[data-theme=dark] .mf-chip:hover{color:#ff7a63}
+[data-theme=dark] .mag-side .side-head{color:#ff7a63}
+[data-theme=dark] .sw-toc ol a:hover{color:#ff7a63}
+[data-theme=dark] .sw-rank a:hover{color:#ff7a63}
+[data-theme=dark] .sw-links a:hover{color:#ff7a63}
+[data-theme=dark] .mw-card a:hover{color:#ff7a63}
+[data-theme=dark] .share-bar .sb-label{color:#ff7a63}
+[data-theme=dark] .rel-eyebrow{color:#ff7a63}
+[data-theme=dark] .rel-card:hover h3{color:#ff7a63}
+[data-theme=dark] .rel-badge{color:#ff7a63}
+[data-theme=dark] .rel-arrow{color:#ff7a63}
+[data-theme=dark] .sw-rel-note b{color:#ff7a63}
+[data-theme=dark] .swr-link:hover .swr-title{color:#ff7a63}
+[data-theme=dark] .swr-badge{color:#ff7a63}
+[data-theme=dark] .menu-item>a.menu-link.active{color:var(--white)}
+[data-theme=dark] .menu-drop a:hover{color:#fff}
+[data-theme=dark] .mega-top .mg-all:hover{color:var(--black)}
+[data-theme=dark] .mf-lead .mf-kicker{color:#fff}
+[data-theme=dark] .sw-toc ol a.cur{color:#fff}
+[data-theme=dark] .mw-card .mw-ic{color:#fff}
+[data-theme=dark] .ap-avatar{color:#fff}
+[data-theme=dark] .ap-social a:hover{color:#fff}
+[data-theme=dark] .sb-btn.cp:hover{color:var(--black)}
+[data-theme=dark] .sb-btn.copied{color:var(--black)}
+[data-theme=dark] .nav a.active{color:#fff}
+[data-theme=dark] .menu-item>a.menu-link.active{color:#fff}
+[data-theme=dark] .tl-year{background:var(--red);color:#fff}
+[data-theme=dark] .faq-num{background:var(--red);color:#fff}
+[data-theme=dark] .brand-name{color:#f5f2ec}
+[data-theme=dark] .mobile-nav a{color:#f5f2ec}
+[data-theme=dark] .reading-list li em{color:#f5f2ec}
+[data-theme=dark] .hero-stat b,[data-theme=dark] .hero-stats .stat b{color:#fff}
+[data-theme=dark] .card .num{color:transparent;-webkit-text-stroke:1px #ff7a63}
+[data-theme=dark] .f-chip.active,[data-theme=dark] .f-chip.active .tag,[data-theme=dark] .f-chip.active span{color:#fff}
+/* ==== AKHIR MODE GELAP OTOMATIS ==== */
