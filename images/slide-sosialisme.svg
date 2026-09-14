@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" role="img" aria-label="Sosialisme Ilmiah dari Utopis ke Ilmiah">
+  <title>Sosialisme Ilmiah dari Utopis ke Ilmiah</title>
+  <desc>Matahari terbit emas di atas pabrik dan ladang, simbol transisi dari utopia ke ilmu</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b0b0d"/>
+      <stop offset="0.5" stop-color="#3a1a0e"/>
+      <stop offset="1" stop-color="#7a2a12"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#f5d48a"/>
+      <stop offset="0.6" stop-color="#e8b64c"/>
+      <stop offset="1" stop-color="#e8b64c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f5d48a"/>
+      <stop offset="1" stop-color="#e8b64c"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="500" fill="url(#sky)"/>
+  <!-- sun rays -->
+  <g stroke="#e8b64c" stroke-opacity="0.18" stroke-width="2">
+    <line x1="600" y1="150" x2="600" y2="40"/><line x1="600" y1="150" x2="760" y2="90"/>
+    <line x1="600" y1="150" x2="440" y2="90"/><line x1="600" y1="150" x2="820" y2="180"/>
+    <line x1="600" y1="150" x2="380" y2="180"/>
+  </g>
+  <circle cx="600" cy="150" r="90" fill="url(#sun)"/>
+  <circle cx="600" cy="150" r="52" fill="#e8b64c"/>
+  <!-- factory silhouettes -->
+  <g fill="#0b0b0d">
+    <rect x="120" y="300" width="180" height="120"/>
+    <rect x="150" y="250" width="30" height="50"/><rect x="240" y="250" width="30" height="50"/>
+    <rect x="150" y="230" width="120" height="20"/>
+    <rect x="420" y="280" width="220" height="140"/>
+    <rect x="450" y="210" width="36" height="70"/><rect x="560" y="210" width="36" height="70"/>
+    <rect x="450" y="190" width="160" height="20"/>
+    <rect x="760" y="310" width="200" height="110"/>
+    <rect x="790" y="250" width="36" height="60"/><rect x="900" y="250" width="36" height="60"/>
+    <rect x="790" y="240" width="146" height="18"/>
+  </g>
+  <!-- chimneys with smoke -->
+  <g fill="#0b0b0d">
+    <rect x="180" y="180" width="22" height="60"/><rect x="300" y="180" width="22" height="60"/>
+    <rect x="500" y="160" width="24" height="60"/><rect x="640" y="160" width="24" height="60"/>
+    <rect x="840" y="180" width="22" height="60"/>
+  </g>
+  <g fill="#e8b64c" opacity="0.5">
+    <circle cx="191" cy="160" r="14"/><circle cx="205" cy="140" r="10"/><circle cx="190" cy="120" r="8"/>
+    <circle cx="512" cy="140" r="14"/><circle cx="528" cy="118" r="10"/><circle cx="512" cy="98" r="8"/>
+    <circle cx="851" cy="160" r="14"/><circle cx="865" cy="140" r="10"/><circle cx="851" cy="120" r="8"/>
+  </g>
+  <!-- ground -->
+  <rect x="0" y="420" width="1200" height="80" fill="#0b0b0d"/>
+  <rect x="0" y="470" width="1200" height="30" fill="url(#gold)"/>
+</svg>
