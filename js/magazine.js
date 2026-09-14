@@ -199,6 +199,15 @@
     on(btn, "click", function (e) {
       var kind = btn.getAttribute("data-share");
       if (kind === "print") { e.preventDefault(); window.print(); return; }
+      if (kind === "print-section" || kind === "print-related") {
+        e.preventDefault();
+        root.setAttribute("data-printmode", kind === "print-section" ? "main" : "related");
+        var donePrint = function () { clearPrintMode(); window.removeEventListener("afterprint", donePrint); };
+        window.addEventListener("afterprint", donePrint);
+        window.print();
+        window.setTimeout(clearPrintMode, 2500);
+        return;
+      }
       if (kind === "copy") {
         e.preventDefault();
         var url = pageUrl();
@@ -301,8 +310,75 @@
     });
   });
 
+  /* =====================================================================
+     6. ARTIKEL TERKAIT (v18)
+     Kartu dibangun dari penanda [data-rel-item] sehingga blok HTML di
+     dalam halaman tetap menjadi cadangan statis yang bisa dipakai bila
+     JavaScript dimatikan. Menambah satu <a data-rel-item> = satu kartu.
+     ===================================================================== */
+  qsa("[data-rel]").forEach(function (sec) {
+    var grid = sec.querySelector("[data-rel-grid]");
+    var items = qsa("[data-rel-item]", sec);
+    if (!grid || !items.length) return;
+
+    function txt(el, sel) {
+      var n = el.querySelector(sel);
+      return n ? (n.textContent || "").replace(/\s+/g, " ").trim() : "";
+    }
+
+    var cards = items.map(function (el) {
+      var href = el.getAttribute("data-href") || "";
+      var cat = txt(el, ".rel-badge");
+      var title = txt(el, "h3");
+      var desc = txt(el, "p");
+      var meta = txt(el, ".rel-meta-txt");
+      if (!href || !title) return null;
+
+      var card = doc.createElement("a");
+      card.className = "rel-card";
+      card.href = href;
+
+      if (cat) {
+        var badge = doc.createElement("span");
+        badge.className = "rel-badge";
+        badge.textContent = cat;
+        card.appendChild(badge);
+      }
+      var h3 = doc.createElement("h3");
+      h3.textContent = title;
+      card.appendChild(h3);
+      if (desc) {
+        var p = doc.createElement("p");
+        p.textContent = desc;
+        card.appendChild(p);
+      }
+      var m = doc.createElement("span");
+      m.className = "rel-meta";
+      var ms = doc.createElement("span");
+      ms.className = "rel-meta-txt";
+      ms.textContent = meta;
+      var ar = doc.createElement("span");
+      ar.className = "rel-arrow";
+      ar.setAttribute("aria-hidden", "true");
+      ar.textContent = "\u2192";
+      m.appendChild(ms);
+      m.appendChild(ar);
+      card.appendChild(m);
+      return card;
+    }).filter(Boolean);
+
+    if (!cards.length) return;
+    while (grid.firstChild) grid.removeChild(grid.firstChild);
+    cards.forEach(function (c) { grid.appendChild(c); });
+    sec.setAttribute("data-rel-count", String(cards.length));
+  });
+
+  /* ---------- cetak selektif: seluruh artikel / artikel ini / terkait ---------- */
+  function clearPrintMode() { root.removeAttribute("data-printmode"); }
+
   /* ---------- bersihkan menu saat mencetak ---------- */
   on(window, "beforeprint", function () { closeAllMenus(); });
+  on(window, "afterprint", clearPrintMode);
 
   /* ---------- ekspos kecil untuk pengujian ---------- */
   window.RWPMag = {

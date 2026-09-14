@@ -104,7 +104,9 @@
    sticky sekaligus aman. Penempatan memakai grid-column eksplisit. */
 .mag-shell{align-items:stretch}
 .mag-shell .mag-main,.mag-shell .mag-side{align-self:start}
-.mag-shell.side-left{grid-template-columns:minmax(0,1fr) 332px}
+/* sidebar kiri: kolom sidebar harus 332px dan konten mengambil sisa lebar.
+   (Sebelumnya kolom tetap "1fr 332px" sehingga konten terkurung di 332px.) */
+.mag-shell.side-left{grid-template-columns:332px minmax(0,1fr)}
 .mag-shell.side-left .mag-main{grid-column:2;grid-row:1}
 .mag-shell.side-left .mag-side{grid-column:1;grid-row:1}
 .mag-main{min-width:0}
@@ -338,4 +340,56 @@
   .sb-btn{font-size:.74rem;padding:.45rem .7rem}
   .mega-cols{grid-template-columns:1fr}
   .mag-widgets{margin-top:2.6rem}
+}
+
+/* ===== v18: ARTIKEL TERKAIT (blok rekomendasi di bawah artikel) ===== */
+.rel-sec{padding:3.4rem 0 4rem;border-top:1px solid var(--line);position:relative}
+.rel-head{max-width:760px;margin-bottom:.4rem}
+.rel-eyebrow{display:inline-block;color:var(--red);font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-size:.74rem;margin-bottom:.5rem}
+.rel-eyebrow:before,.rel-eyebrow:after{content:"\2014";margin:0 .45rem;color:var(--gold)}
+.rel-head h2{font-size:clamp(1.5rem,2.8vw,2.1rem);margin-bottom:.45rem}
+.rel-sub{color:var(--muted);font-size:.94rem;margin:0}
+.rel-sub b{color:var(--ink)}
+[data-theme=dark] .rel-sub b{color:var(--gold-light)}
+.rel-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.1rem 0 1.6rem}
+.rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;align-items:stretch}
+.rel-card{position:relative;display:flex;flex-direction:column;gap:.55rem;background:var(--white-2);border:1px solid var(--line);border-radius:var(--radius);padding:1.2rem 1.25rem 1.05rem;overflow:hidden;transition:transform .28s,box-shadow .28s,border-color .28s}
+[data-theme=dark] .rel-card{background:var(--black-2)}
+.rel-card:before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold));opacity:.9}
+.rel-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);border-color:var(--red)}
+.rel-card h3{font-family:var(--display);font-size:1.02rem;color:var(--ink);line-height:1.32;margin:0}
+.rel-card:hover h3{color:var(--red)}
+[data-theme=dark] .rel-card:hover h3{color:var(--gold)}
+.rel-card p{font-size:.86rem;color:var(--muted);margin:0}
+.rel-badge{align-self:flex-start;font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;background:#c0392b1f;color:var(--red);padding:.2rem .55rem;border-radius:50px}
+[data-theme=dark] .rel-badge{background:#c0392b33;color:var(--gold-light)}
+.rel-meta{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-top:auto;padding-top:.55rem;border-top:1px solid var(--line);font-size:.72rem;color:var(--muted);letter-spacing:.04em}
+.rel-arrow{color:var(--red);font-weight:900;transition:transform .25s}
+.rel-card:hover .rel-arrow{color:var(--gold);transform:translateX(4px)}
+.rel-foot{margin:1.5rem 0 0;font-size:.82rem;color:var(--muted)}
+.rel-foot a{font-weight:700}
+@media(max-width:1040px){.rel-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:680px){.rel-grid{grid-template-columns:1fr}.rel-sec{padding:2.6rem 0 3rem}.rel-chips{gap:.42rem}}
+@media print{
+  .rel-sec{padding:1.1rem 0 0;border-top:1px solid #999;break-inside:auto}
+  .rel-eyebrow:before,.rel-eyebrow:after{content:"";margin:0}
+  .rel-chips,.rel-foot a{display:none}
+  .rel-grid{grid-template-columns:1fr 1fr;gap:.6rem}
+  .rel-card{break-inside:avoid;border:1px solid #bbb;background:#fff;padding:.6rem .7rem}
+  .rel-card:before{display:none}
+  .rel-card p{font-size:.72rem}
+  .rel-meta{border-top:none;padding-top:.2rem}
+}
+/* v18 — cetak selektif: mode "main" (artikel ini) / "related" (hanya terkait).
+   Aturan "show" untuk .rel-sec sengaja LEBIH SPESIFIK daripada aturan "hide"
+   pada .mag-main > .section supaya blok terkait tetap tampil saat dicetak. */
+@media print{
+  .rel-arrow{display:none!important}
+  html[data-printmode="main"] .rel-sec{display:none!important}
+  html[data-printmode="related"] .mag-main > .section,
+  html[data-printmode="related"] .ad-box,
+  html[data-printmode="related"] .print-head,
+  html[data-printmode="related"] .page-hero{display:none!important}
+  html[data-printmode="related"] .mag-main > .section.rel-sec{display:block!important}
+  html[data-printmode="related"] .rel-foot a{display:none!important}
 }
