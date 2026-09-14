@@ -393,3 +393,32 @@
   html[data-printmode="related"] .mag-main > .section.rel-sec{display:block!important}
   html[data-printmode="related"] .rel-foot a{display:none!important}
 }
+
+/* ===== v19 — widget sidebar "Artikel Terkait" (versi ringkas, tepat 3 kartu).
+   Gaya kompak khas sidebar: nomor urut bergaris emas/merah, badge kategori kecil,
+   tanpa thumbnail. Memakai variabel palet yang sudah ada (merah-hitam-emas). */
+.sw.sw-rel{border-top:3px solid var(--red);position:relative}
+.sw.sw-rel h4{margin-bottom:.45rem}
+.sw-rel-note{font-size:.76rem;color:var(--muted);margin:0 0 .72rem;line-height:1.45}
+.sw-rel-note b{color:var(--red)}
+[data-theme=dark] .sw-rel-note b{color:var(--gold-light)}
+.sw-rel-list{display:flex;flex-direction:column;gap:0;list-style:none;margin:0}
+.swr-i{border-bottom:1px dashed var(--line)}
+.swr-i:last-child{border-bottom:none}
+.swr-link{display:flex;gap:.62rem;align-items:flex-start;padding:.55rem 0;transition:padding .2s}
+.swr-i:first-child .swr-link{padding-top:.1rem}
+.swr-i:last-child .swr-link{padding-bottom:0}
+.swr-link:hover{padding-left:.28rem}
+.swr-n{font-family:var(--display);font-size:1.12rem;font-weight:700;color:transparent;-webkit-text-stroke:1px rgba(192,57,43,.55);min-width:20px;line-height:1.15;flex-shrink:0}
+.swr-link:hover .swr-n{color:var(--gold);-webkit-text-stroke:0}
+.swr-b{display:flex;flex-direction:column;gap:.32rem;min-width:0}
+.swr-title{font-size:.85rem;font-weight:700;color:var(--ink);line-height:1.34}
+.swr-link:hover .swr-title{color:var(--red)}
+[data-theme=dark] .swr-link:hover .swr-title{color:var(--gold)}
+.swr-badge{align-self:flex-start;font-size:.57rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase;background:#c0392b1f;color:var(--red);padding:.14rem .46rem;border-radius:50px}
+[data-theme=dark] .swr-badge{background:#c0392b33;color:var(--gold-light)}
+/* fallback peramban tanpa dukungan -webkit-text-stroke: nomor tetap terbaca */
+@supports not (-webkit-text-stroke:1px red){.swr-n{color:var(--red)!important}}
+@media(max-width:680px){.swr-title{font-size:.87rem}.sw-rel-note{font-size:.74rem}}
+/* cetak: .mag-side sudah disembunyikan; aturan ini menjaga bila sidebar ikut dirender */
+@media print{.sw.sw-rel{display:none!important}}

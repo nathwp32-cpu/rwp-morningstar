@@ -13,6 +13,26 @@ Platform kajian **Marxisme Ilmiah** dan **Sosialisme Ilmiah** dengan analisis st
 - **Cache-buster dinaikkan ke `?v=18`** di seluruh halaman (tanpa sisa `?v=17`).
 - Dua **bug tata letak dunia nyata** yang ditemukan & diperbaiki saat verifikasi: (a) aturan cetak mode "related" kalah spesifisitas sehingga blok terkait justru tersembunyi; (b) `sosialisme-papua.html` memakai kolom grid `1fr 332px` dengan sidebar di kiri sehingga kolom konten terkurung di **332px** — kini `332px minmax(0,1fr)` sehingga konten kembali normal (±846px).
 
+## Baru di v19 — Widget Sidebar "Artikel Terkait" (versi ringkas)
+- **Widget baru `.sw.sw-rel` berisi tepat 3 kartu** di dalam **Sidebar Area** pada seluruh 9 halaman, ditambahkan **tanpa** mengubah widget sidebar yang sudah ada (Daftar Isi, Terpopuler, Terbaru, Kategori, Kutipan, Jelajahi Topik, iklan sidebar), mega menu, area unggulan, footer, profil penulis, tombol berbagi/cetak, maupun blok **Artikel Terkait 6 kartu** di bawah artikel.
+- Posisi widget: **setelah Daftar Isi Halaman dan sebelum widget pertama** tiap halaman — urutan widget tetap terbaca (`Daftar Isi → Artikel Terkait (ringkas) → [widget asli halaman] → Iklan → …`), sticky sidebar dan **scrollspy** tidak terganggu.
+- **3 kartu per halaman = 27 kartu total**, dipilih agar **berbeda** dari 6 kartu blok besar (tidak ada duplikat), relevan dengan kategori halaman:
+  | Halaman | 3 artikel sidebar |
+  |---|---|
+  | `index` | Peran Sumber Daya Alam dalam Ekonomi Papua (Analisis) · Prinsip-Prinsip Sosialisme Papua (Program) · Studi Kasus Perbandingan (Studi) |
+  | `marxisme` | Tiga Hukum Dialektika (Teori) · Teori Krisis & Siklus Kapital (Teori) · Analisis Konkret: Metode Lima Langkah (Teori) |
+  | `sosialisme` | Perencanaan Partisipatif (Teori) · Demokrasi Ekonomi & Kepemilikan Bersama (Teori) · Relevansi untuk Papua (Program) |
+  | `analisa-papua` | Sumber Daya & Grasberg (Analisis) · Otonomi Khusus: Evaluasi 25 Tahun (Analisis) · Geopolitik Pasifik dan Aktor Eksternal (Analisis) |
+  | `sosialisme-papua` | Peta Jalan Transisi Bertahap (Program) · Tata Kelola Adat & Demokrasi Kampung (Program) · Indikator Keberhasilan dan Pemantauan (Program) |
+  | `anti-seksisme-patriarki` | Tokoh & Organisasi Perempuan Papua (Perempuan) · Kritik Seksisme dalam Praktik Gerakan (Perempuan) · Glosarium Istilah (Rujukan) |
+  | `galeri-foto` | Galeri Foto Perjuangan Papua (Arsip) · Jelajahi Seluruh Ruang West Papua (Rujukan) · Sumber, Etika Visual & Bacaan Lanjutan (Etika) |
+  | `faq` | Sosialisme Ilmiah (10 pertanyaan) (Teori) · Analisis West Papua (6 pertanyaan) (Analisis) · Praksis & Perjuangan (5 pertanyaan) (Praksis) |
+  | `forum` | Tulis Diskusi Baru (Forum) · Video Terbaru — Papua Berbicara (Video) · Pertanyaan Diskusi per Bab (Rujukan) |
+- Setiap kartu memuat **nomor urut** (garis luar emas/merah), **judul**, dan **badge kategori**; gaya kompak khas sidebar, palet merah–hitam–emas, dukungan **mode gelap**, serta `@supports` fallback agar nomor tetap terbaca bila `-webkit-text-stroke` tidak didukung.
+- **Tidak menghitung tautan ganda**: `#terkait` tetap satu (blok besar), sehingga **tidak ada ID duplikat** dan tidak ada tautan internal menggantung.
+- **Aturan cetak**: `.sw.sw-rel` disembunyikan saat dicetak (sidebar memang tidak dicetak), jadi gaya cetak selektif tetap rapi.
+- **Cache-buster dinaikkan ke `?v=19`** di seluruh halaman (tanpa sisa `?v=18`).
+
 ## Baru di v12
 - **Halaman baru: `galeri-foto.html`** — **Galeri Foto Perjuangan Papua** (7 bagian, 12 foto, ±46 KB) yang menata arsip visual perjuangan Papua ke dalam **enam kategori** (Sejarah, Demonstrasi, Perempuan, Tanah & Sumber Daya, Budaya, Pendidikan):
   1. **Mengapa arsip visual penting** — gambar sebagai metode, dan arsip sebagai medan kontestasi + kotak **Catatan Etika Visual**
