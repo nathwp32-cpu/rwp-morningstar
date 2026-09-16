@@ -2,6 +2,22 @@
 
 Platform kajian **Marxisme Ilmiah** dan **Sosialisme Ilmiah** dengan analisis struktural mendalam atas **West Papua**.
 
+## Baru di v27 — Sorotan Bergulir Otomatis pada Rail Zona 4a
+
+- **Kartu "Peta Zona" baru di rail kiri (Zona 4a) `analisa-papua.html`** — tujuh tautan zona berjangkar nyata: `#zona-mega-links`, `#zona-top-featured`, `#zona-magazine-widgets`, `#zona-sidebar`, `#zona-sidebar-tab`, `#zona-author`, `#zona-footer`.
+- **Sorotan mengikuti posisi gulir**: tautan zona yang sedang aktif ditandai merah–emas, bernomor, dan diberi keterangan "Zona N dari 7" plus penunjuk posisi vertikal; sublabel tiap tautan tetap terbaca di kedua mode tema.
+- **Tautan aktif otomatis digulir ke dalam area rail** (`scrollIntoView`-setara dengan `scrollTo({block:'nearest'})`). Yang bergerak adalah **wadah rail** (`scrollTop`), **bukan posisi gulir halaman** — terbukti `pageY` tetap sama sebelum dan sesudah.
+- **Tidak berkedip & tidak merebut kendali**: sorotan digerakkan `IntersectionObserver` + rAF-throttle, dan gulir rail **hanya dipicu saat zona aktif benar-benar berpindah** (`if (i === curIdx) return`), sehingga gulir manual pengunjung tidak dilawan (gestur < 300 ms dihormati).
+- **Menghormati `prefers-reduced-motion`**: saat "kurangi gerakan" aktif, gulir rail **instan** (`behavior:'auto'`) dan denyut `rwpRailPulse` dimatikan, tetapi **sorotan tetap bekerja**. Perubahan pengaturan sistem diikuti tanpa reload lewat listener `matchMedia`.
+- **Tetap berfungsi tanpa JavaScript**: kartu tetap tampil dan semua tautan tetap dapat diklik sebagai anchor biasa.
+- **Rail kini wadah gulir sticky** (desktop ≥1181px): `position:sticky; top:96px; max-height:calc(100vh - 128px)`. Sebelumnya daftar zona berada di puncak halaman sehingga sudah jauh di atas layar saat pembaca tiba di zona berikutnya — sorotan tak akan pernah terlihat.
+- **Bug v26 yang ditemukan & diperbaiki**: `#zona-sidebar-tab` (div `.stab`) tingginya **0 px** di desktop — flex item ber-`overflow:hidden` punya `min-height:auto` yang berlaku sebagai 0 dan dapat disusutkan sampai nol ketika induknya diberi `max-height` (aturan v26). Akibatnya **zona Sidebar Tab Area tidak terlihat sama sekali** di desktop. `flex:0 0 auto` mengembalikannya: **0 → 213 px (desktop) / 176 px (mobile)**, 10 tab utuh.
+- **Perbaikan pengukuran posisi zona**: elemen `position:sticky` (rail & sidebar kanan) tergeser dari posisi tata letaknya saat menempel, dan pergeseran itu ikut terbaca `getBoundingClientRect()` — membuat ambang sorotan tertinggal. Posisi kini diukur dengan sticky dinetralkan sesaat (dipulihkan sebelum bingkai dilukis, tanpa kedipan), dengan **satu ambang yang sama di semua viewport** (120 px).
+- **Kontras**: sublabel tautan aktif di atas latar merah diperbaiki `#ffe0d6` (4,37 — gagal) → `#fff1ec` (**4,93**) pada ukuran 9,76 px; judul 5,44.
+- **CSS baru bersifat aditif** (`css/magazine.css` bagian v27) — hanya menyentuh `.z-rail` / `.srail` / `.z-side`, mode gelap manual & otomatis ikut ditangani. **JS baru** (`js/magazine.js` blok v27) mengekspos `window.RWPRail` untuk verifikasi.
+- **Verifikasi**: 15/15 halaman tag seimbang, CSS `778/778` & `774/774`, `node --check` bersih untuk kedua JS, **5.540 referensi internal → 0 menggantung**, AdSense meta & skrip tepat **1×** di 15/15 halaman, Chromium **1440×900 & 390×844** tanpa scroll horizontal, **7/7 zona tersorot** di keempat kombinasi viewport × reduced-motion, tema tiga-mode utuh, tanpa `pageerror`.
+- **Cache-buster dinaikkan ke `?v=27`** di seluruh 15 halaman (**63 referensi**, tanpa sisa `?v=26`).
+
 ## Baru di v26 — Panel Mega Menu "Tata Letak" (tautan ke tiap zona)
 
 - **Panel mega menu ke-5 berlabel "Tata Letak"** ditambahkan di **seluruh 15 halaman** (tab `id="tab-tataletak"`, panel `id="panel-tataletak"`). Panel ini menautkan langsung ke **tiap zona tata letak** di `analisa-papua.html`.

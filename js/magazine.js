@@ -580,6 +580,8 @@
       }
       sc = sc.parentElement;
     }
+    // Offset di bawah ambang sorotan blok v27 (120px) supaya zona yang
+    // dituju langsung tersorot begitu halaman berhenti menggulir.
     var off = window.innerWidth <= 680 ? 80 : 96;
     var target = function () {
       var r = el.getBoundingClientRect().top + window.pageYOffset - off;
@@ -649,5 +651,234 @@
       if (!el) return false;
       scrollToZone(el); ping(el); return true;
     }
+  };
+})();
+
+
+/* =====================================================================
+   v27 · RAIL ZONA 4a — SOROTAN + GULIR OTOMATIS
+   Tautan zona yang sedang aktif (#zona-*) di dalam rail kiri digulir
+   otomatis ke area terlihat rail. Tiga rambu penting:
+     1. Yang digulir adalah WADAH RAIL (scrollTop), bukan halaman — posisi
+        gulir halaman tidak pernah tersentuh.
+     2. Gulir hanya dipicu saat zona aktif BENAR-BENAR BERPINDAH, sehingga
+        tidak ada gulir berulang saat pengunjung menggulir manual.
+     3. Bila pengunjung sedang menggulir rail sendiri (gestur <300 ms),
+        rail tidak direbut.
+   Bila "kurangi gerakan" aktif, gulir rail instan (tanpa animasi) dan
+   sorotan tetap bekerja. Tanpa JavaScript: kartu tetap tampil dan semua
+   tautan tetap dapat diklik sebagai anchor biasa.
+   ===================================================================== */
+(function () {
+  "use strict";
+
+  var doc = document;
+  var card = doc.querySelector("[data-srail]");
+  if (!card) return;
+
+  var links = Array.prototype.slice.call(card.querySelectorAll("[data-srail-link]"));
+  if (!links.length) return;
+
+  var thumb = card.querySelector("[data-srail-thumb]");
+  var track = card.querySelector("[data-srail-track]");
+  var out = card.querySelector("[data-srail-pos]");
+
+  function reduce() {
+    try { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; }
+    catch (e) { return false; }
+  }
+  function scrollY() { return window.pageYOffset || doc.documentElement.scrollTop || 0; }
+
+  /* Jarak aman dari puncak viewport: header sticky (±64-72px) plus ruang
+     napas. Dipakai angka yang SAMA di semua viewport — ambang lama yang
+     berbeda-beda (150/160) menyebabkan "keterlambatan" sorotan di layar
+     sempit: zona yang puncaknya sudah lewat viewport belum ikut tersorot. */
+  function chromeOff() { return 120; }
+
+  /* Wadah gulir TERDEKAT yang memuat elemen zona (bukan sebaliknya). */
+  function zoneScroller(el) {
+    var node = el.parentElement;
+    while (node && node !== doc.body && node !== doc.documentElement) {
+      var st = window.getComputedStyle(node);
+      if (/(auto|scroll|overlay)/.test(st.overflowY) && node.scrollHeight > node.clientHeight + 4) return node;
+      node = node.parentElement;
+    }
+    return null;
+  }
+
+  /* Zona yang benar-benar ada di halaman ini saja (tautan lintas-halaman
+     atau anchor yang hilang otomatis diabaikan). */
+  var items = links.map(function (a) {
+    var id = (a.getAttribute("href") || "").replace(/^#/, "");
+    var el = id ? doc.getElementById(id) : null;
+    return el ? { a: a, el: el, id: id, top: 0 } : null;
+  }).filter(Boolean);
+  if (!items.length) return;
+
+  /* Elemen yang posisinya berubah sendiri saat menempel (sticky) dan karena
+     itu menyesatkan pengukuran posisi zona. Diambil dari lompatan tetua
+     tiap zona supaya mencakup rail maupun kolom kanan. */
+  var stickyNodes = (function () {
+    var seen = [], out = [];
+    items.forEach(function (t) {
+      var n = t.el.parentElement;
+      while (n && n !== doc.body && n !== doc.documentElement) {
+        if (window.getComputedStyle(n).position === "sticky" && seen.indexOf(n) === -1) {
+          seen.push(n); out.push(n);
+        }
+        n = n.parentElement;
+      }
+    });
+    return out;
+  })();
+
+  function measure() {
+    var y = scrollY(), i;
+    /* Elemen position:sticky (rail & kolom kanan) tergeser dari posisi tata
+       letaknya saat menempel, dan pergeseran itu IKUT terbaca oleh
+       getBoundingClientRect() maupun offsetTop — sehingga posisi terukur
+       berubah mengikuti posisi gulir dan ambang sorotan jadi tertinggal
+       (terbukti: zona 5 baru tersorot setelah pembaca melewati zona 6).
+       Pengukuran karena itu dilakukan dengan sticky dinetralkan sesaat;
+       pemulihannya terjadi SEBELUM bingkai dilukis, jadi tak ada kedipan.
+       Dengan sticky netral, rect sudah sama dengan posisi alir dokumen —
+       termasuk untuk zona yang berada DI DALAM wadah bergulir (Sidebar Tab
+       Area di dalam sidebar berbatas tinggi), sebab wadahnya juga ikut
+       dikembalikan ke posisi alir. */
+    for (i = 0; i < stickyNodes.length; i++) { stickyNodes[i].style.position = "static"; }
+    items.forEach(function (t) {
+      t.rect = t.el.getBoundingClientRect().top + y;
+      t.top = t.rect;
+    });
+    for (i = 0; i < stickyNodes.length; i++) { stickyNodes[i].style.position = ""; }
+  }
+
+  /* Wadah gulir rail (desktop) — null bila rail tidak menggulir (mobile). */
+  function railScroller() {
+    var node = card.parentElement;
+    while (node && node !== doc.body && node !== doc.documentElement) {
+      var st = window.getComputedStyle(node);
+      if (/(auto|scroll|overlay)/.test(st.overflowY) && node.scrollHeight > node.clientHeight + 4) return node;
+      node = node.parentElement;
+    }
+    return null;
+  }
+
+  var curIdx = -1;
+  var railTouchedAt = 0;
+  var railEl = railScroller();
+  if (railEl) {
+    railEl.addEventListener("scroll", function () { railTouchedAt = Date.now(); }, { passive: true });
+  }
+
+  function mark(i) {
+    items.forEach(function (t, k) {
+      var on = k === i;
+      t.a.classList.toggle("active", on);
+      if (on) t.a.setAttribute("aria-current", "true");
+      else t.a.removeAttribute("aria-current");
+    });
+    if (out) out.textContent = "Zona " + (i + 1) + " dari " + items.length;
+    if (thumb && track && items.length > 1) {
+      var free = track.clientHeight - thumb.offsetHeight;
+      if (free < 0) free = 0;
+      var p = i / (items.length - 1);
+      thumb.style.transform = "translateY(" + Math.round(free * p) + "px)";
+    }
+    card.setAttribute("data-srail-cur", items[i].id);
+  }
+
+  /* Bawa tautan aktif ke area terlihat SETIAP wadah gulir di atasnya
+     (rail desktop). Tidak pernah menyentuh posisi gulir halaman. */
+  function ensureVisible(a) {
+    if (Date.now() - railTouchedAt < 300) return false;
+    var moved = false;
+    var node = a.parentElement;
+    while (node && node !== doc.body && node !== doc.documentElement) {
+      var st = window.getComputedStyle(node);
+      if (/(auto|scroll|overlay)/.test(st.overflowY) && node.scrollHeight > node.clientHeight + 4) {
+        var lr = a.getBoundingClientRect(), nr = node.getBoundingClientRect(), pad = 10, delta = 0;
+        if (lr.top < nr.top + pad) delta = lr.top - nr.top - pad;
+        else if (lr.bottom > nr.bottom - pad) delta = lr.bottom - nr.bottom + pad;
+        if (delta) {
+          var to = Math.max(0, node.scrollTop + delta);
+          if (node.scrollTo) node.scrollTo({ top: to, behavior: reduce() ? "auto" : "smooth" });
+          else node.scrollTop = to;
+          moved = true;
+        }
+      }
+      node = node.parentElement;
+    }
+    return moved;
+  }
+
+  /* Zona aktif = zona terdalam yang puncaknya sudah terlewati garis acuan.
+     Zona dengan puncak sama persis dimenangkan yang lebih luar (indeks
+     lebih kecil), agar tidak ada zona yang tak pernah tersorot. */
+  function pick() {
+    var y = scrollY() + chromeOff();
+    var idx = 0, last = -Infinity;
+    items.forEach(function (t, i) {
+      if (t.top <= y && t.top > last) { last = t.top; idx = i; }
+    });
+    return idx;
+  }
+
+  var ticking = false;
+  function update() {
+    ticking = false;
+    measure();
+    var i = pick();
+    if (i === curIdx) return;   // hanya bergulir saat zona benar-benar berpindah
+    curIdx = i;
+    mark(i);
+    ensureVisible(items[i].a);
+  }
+  function schedule() {
+    if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+  }
+
+  /* IntersectionObserver: pemicu kasar saat zona masuk/keluar viewport;
+     gulir tetap ditangani rAF-throttle di bawah agar hemat. */
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function () { schedule(); }, { threshold: [0, 0.25, 0.5, 1] });
+    items.forEach(function (t) { io.observe(t.el); });
+  }
+  window.addEventListener("scroll", schedule, { passive: true });
+  window.addEventListener("resize", schedule);
+  window.addEventListener("load", schedule);
+  /* pengaturan sistem berubah tanpa reload → segarkan sorotan & mode gulir */
+  try {
+    var mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (mq && mq.addEventListener) mq.addEventListener("change", schedule);
+    else if (mq && mq.addListener) mq.addListener(schedule);
+  } catch (e) { /* diamkan */ }
+
+  measure();
+  /* Gambar & iklan dapat menggeser posisi zona setelah muat */
+  [300, 900, 1800].forEach(function (ms) { window.setTimeout(schedule, ms); });
+  update();
+
+  window.RWPRail = {
+    count: items.length,
+    ids: items.map(function (t) { return t.id; }),
+    active: function () { return curIdx >= 0 ? items[curIdx].id : null; },
+    card: card,
+    railScrollTop: function () { var sc = railScroller(); return sc ? Math.round(sc.scrollTop) : null; },
+    railScrollable: function () { return !!railScroller(); },
+    railVisible: function (id) {
+      var t = items.filter(function (x) { return x.id === id; })[0];
+      var sc = railScroller();
+      if (!t || !sc) return null;
+      var lr = t.a.getBoundingClientRect(), sr = sc.getBoundingClientRect();
+      return lr.top >= sr.top - 2 && lr.bottom <= sr.bottom + 2;
+    },
+    /* posisi tiap zona: top = dalam aliran dokumen (dipakai pemilihan zona),
+       rect = posisi layar (dipakai pemeriksaan keterlihatan) */
+    tops: function () {
+      measure();
+      return items.map(function (t) { return { id: t.id, top: Math.round(t.top), rect: Math.round(t.rect) }; });
+    },
+    refresh: function () { measure(); schedule(); }
   };
 })();
