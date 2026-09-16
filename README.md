@@ -2,6 +2,22 @@
 
 Platform kajian **Marxisme Ilmiah** dan **Sosialisme Ilmiah** dengan analisis struktural mendalam atas **West Papua**.
 
+## Baru di v23 — Lima Halaman Materi Teori Baru (Partai, Organisasi, Front, Sosialisme Ilmiah, Penentuan Nasib Sendiri)
+Situs kini berisi **14 halaman** (9 lama + 5 baru). Seluruh **tujuh materi** yang diminta tersedia lengkap dan saling tertaut:
+
+| Halaman baru | Materi | Bagian (jangkauan isi) |
+|---|---|---|
+| `partai-organisasi-revolusioner.html` | **1. Partai Revolusioner** & **2. Organisasi Revolusioner** | 14 bagian: dari Manifesto Komunis & Liga Komunis, "Apa yang Harus Dilakukan?" (vanguard & kesadaran dari luar), sentralisme demokratis, sosial-demokrasi massa, spontanitas massa Rosa Luxemburg, partai sebagai "pangeran modern" Gramsci, partai dalam *Negara dan Revolusi*, garis massa Mao; bahaya birokratisasi, degenerasi partai, tanda-tanda peringatan, syarat tetap terhubung massa; bentuk organisasi (sel, komite, front, serikat, koperasi, organisasi massa), hak minoritas, hubungan partai–serikat–tani–pemuda–perempuan, legal vs bawah tanah, kaderisasi, pelajaran organisasi di negeri terjajah |
+| `front-taktis-strategis.html` | **3. Front Taktis** & **4. Front Strategis** | 11 bagian: definisi & hakikat front taktis (aliansi jangka pendek, tujuan terbatas, kriteria masuk-keluar, batas kompromi), bahaya oportunisme vs sektarianisme, contoh historis (Front Populer 1935, front bersatu buruh-tani, aliansi anti-kolonial), cara menilai keberhasilan; lalu front strategis (aliansi jangka panjang berbasis kelas), blok historis Gramsci, front nasional-demokratik, tahapan revolusi & revolusi berkelanjutan, kriteria kelas, risiko koalisi menumpulkan perjuangan, dan tabel pembanding taktis vs strategis |
+| `sosialisme-ilmiah.html` | **5. Sosialisme Ilmiah** | 8 bagian: dari sosialisme utopis (Saint-Simon, Fourier, Owen) ke sosialisme ilmiah Marx–Engels; materialisme historis & dialektis; analisis kelas dan nilai lebih; negara dan revolusi; fase transisi & Kritik Program Gotha; sosialisme di negeri terjajah; perdebatan kontemporer (sosialisme abad 21, pengalaman negara sosialis, kritik terhadap keduanya); tegas pada akhir: **sosialisme ilmiah adalah alat analisis, bukan dogma** |
+| `hak-menentukan-nasib-sendiri-papua.html` | **6. Hak Menentukan Nasib Sendiri bagi West Papua** | 10 bagian: hak itu dalam Marxisme (Lenin *The Right of Nations to Self-Determination*, Stalin *Marxism and the National Question*), bangsa tertindas vs penindas, dukungan atas pembebasan nasional, kaitannya dengan revolusi sosialis, kriteria "bangsa" & penerapannya pada Papua, sejarah (Perjanjian New York 1962, PEPERA 1969, kritik), status hukum internasional (Resolusi MU PBB 1514 & 1541, Kovenan Sipil-Politik Pasal 1, pendapat hukum), dan posisi Marxis hari ini |
+| `analisa-marxisme-papua.html` | **7. Analisa Marxisme Ilmiah sesuai Situasi West Papua** | 14 bagian: mode produksi & formasi sosial Papua, ekonomi ekstraktif (Grasberg/Freeport, migas, kayu, sawit), hubungan produksi & kepemilikan modal, surplus value yang dialihkan keluar, kelas-kelas di Papua (buruh tambang, petani, nelayan, pekerja informal, kelas menengah birokratik, borjuasi komprador), negara & militer, migrasi & demografi, kolonialisme internal & imperialisme, superstruktur (agama, pendidikan, bahasa, budaya), kontradiksi utama & sekunder, sampai strategi-taktik: siapa kawan–siapa lawan, bentuk organisasi, front taktis & strategis, tahapan menuju sosialisme Papua |
+
+- **Seluruh fitur situs dibawa utuh ke 5 halaman baru**: header + mega menu 4 panel, menu mobile akordeon, kontrol tema tiga-mode (Otomatis/Terang/Gelap), sidebar sticky dengan **Daftar Isi + widget Artikel Terkait 3 kartu**, **blok Artikel Terkait 6 kartu**, tombol berbagi & cetak (termasuk *Cetak artikel ini saja* dan *Cetak artikel terkait*), 6 unit iklan AdSense (auto, in-feed, multiplex), profil penulis, widget majalah, dan footer multi-kolom.
+- **Navigasi situs diperbarui di seluruh halaman**: mega menu panel **Teori & Metode** bertambah *Partai Revolusioner* dan *Organisasi Revolusioner*; panel **Analisis Papua** bertambah *Hak Menentukan Nasib Sendiri* dan *Front Taktis & Strategis*; **menu mobile** bertambah 5 tautan baru; **footer kolom Navigasi** bertambah 5 halaman baru. **Widget Artikel Terkait sidebar (3 kartu)** dan **blok Artikel Terkait (6 kartu)** pada halaman lama juga ditambah kartu-kartu baru yang menunjuk ke lima halaman ini, sehingga seluruh materi baru terjangkau dari halaman mana pun.
+- **Cache-buster dinaikkan ke `?v=23`** di seluruh 14 halaman (tanpa sisa `?v=22`).
+- **`sitemap.xml` diperbarui** menjadi 14 URL dan **README ini** memuat daftar halaman baru.
+
 ## Baru di v22 — Hormati `prefers-reduced-motion` (slider hero & slider YouTube)
 - **Autoplay slider hero dan slider YouTube berhenti otomatis** saat pengguna mengaktifkan **"Kurangi gerakan" / reduce motion** di sistem. Tidak ada tombol baru, tidak ada preferensi tersimpan — perilaku murni mengikuti pengaturan sistem.
 - **Transisi perpindahan slide dibuat instan** (`transition:none`) pada mode tersebut — slide langsung pindah, tanpa animasi geser.
@@ -140,7 +156,7 @@ Platform kajian **Marxisme Ilmiah** dan **Sosialisme Ilmiah** dengan analisis st
 - Kotak pencarian (search modal) untuk seluruh bagian
 - Desain responsif mobile-first (uji 390px & 1440px)
 - Animasi reveal saat scroll, progress bar, tombol kembali ke atas
-- **9 halaman**: Beranda, Marxisme, Sosialisme, **Anti Seksisme & Patriarki**, Analisa West Papua, Sosialisme Papua, **Galeri Foto Perjuangan**, FAQ (30 pertanyaan), Forum Diskusi
+- **14 halaman**: Beranda, Marxisme, Sosialisme, **Anti Seksisme & Patriarki**, Analisa West Papua, Sosialisme Papua, **Galeri Foto Perjuangan**, FAQ (30 pertanyaan), Forum Diskusi — ditambah **5 halaman materi teori baru (v23)**: Partai & Organisasi Revolusioner, Front Taktis & Strategis, Sosialisme Ilmiah (Metode), Hak Menentukan Nasib Sendiri, dan Analisa Marxisme Papua
 - **Galeri foto** dengan lightbox (tombol panah & Esc), filter 6 kategori, kronologi bergambar, dan tabel status gambar
 - Forum dengan balasan, pencarian, filter tag, pengurutan (terbaru/terpopuler/terbanyak dibalas), penghitung tampilan, penanda tersemat, tombol dukung, dan ekspor JSON/CSV
 - **Monetisasi Google AdSense** (Publisher ID `ca-pub-6557428036767230`)
@@ -157,6 +173,11 @@ ruang-west-papua_v12/
 ├── faq.html
 ├── forum.html
 ├── galeri-foto.html           ← baru di v12 (galeri foto perjuangan)
+├── partai-organisasi-revolusioner.html      ← baru di v23 (materi 1–2)
+├── front-taktis-strategis.html              ← baru di v23 (materi 3–4)
+├── sosialisme-ilmiah.html                   ← baru di v23 (materi 5)
+├── hak-menentukan-nasib-sendiri-papua.html  ← baru di v23 (materi 6)
+├── analisa-marxisme-papua.html              ← baru di v23 (materi 7)
 ├── ads.txt                       ← deklarasi penjual resmi AdSense
 ├── css/style.css
 ├── css/magazine.css             ← tata letak majalah (v17)
@@ -166,7 +187,7 @@ ruang-west-papua_v12/
 ├── netlify.toml
 ├── README.md
 ├── robots.txt
-└── sitemap.xml                   ← 9 halaman
+└── sitemap.xml                   ← 14 halaman
 ```
 
 ## Deploy ke Netlify (Drag & Drop)
@@ -212,5 +233,6 @@ Ganti **`VIDEO_ID`** pada 3 tempat (`data-yt-id`, URL thumbnail, URL tonton) + j
 - **Blok "Artikel Terkait" ada di 9/9 halaman** dengan **6 kartu** dan tautan yang valid (0 tautan menggantung, 0 ID duplikat)
 - Uji browser (Chromium) pada mobile 390px & desktop 1440px: slider YouTube berjalan otomatis, tombol navigasi berfungsi, tanpa scroll horizontal (`scrollX=0` di 9/9 halaman; sapuan lebar 1024–1920px pada halaman nav terpanjang juga bersih)
 - Uji galeri: filter kategori menyaring kartu, lightbox membuka/menutup dengan tombol, panah, dan Esc
+- **v23**: meta & skrip AdSense tepat sekali di **14/14 halaman**; blok "Artikel Terkait" (6 kartu) dan widget sidebar (3 kartu) ada di **14/14 halaman** dengan tautan valid; tidak ada tautan internal menggantung; uji Chromium 390px & 1440px tanpa scroll horizontal; kontrol tema tiga-mode dan penghormatan `prefers-reduced-motion` terverifikasi pada halaman baru
 
 © 2026 Ruang West Papua (RWP) — konten bebas disebarluaskan untuk pendidikan.
