@@ -2,6 +2,28 @@
 
 Platform kajian **Marxisme Ilmiah** dan **Sosialisme Ilmiah** dengan analisis struktural mendalam atas **West Papua**.
 
+## Baru di v26 — Panel Mega Menu "Tata Letak" (tautan ke tiap zona)
+
+- **Panel mega menu ke-5 berlabel "Tata Letak"** ditambahkan di **seluruh 15 halaman** (tab `id="tab-tataletak"`, panel `id="panel-tataletak"`). Panel ini menautkan langsung ke **tiap zona tata letak** di `analisa-papua.html`.
+- **Tujuh zona pada permintaan + satu zona tambahan** — semuanya memakai anchor yang benar-benar ada:
+  | Tautan panel | Anchor | Elemen |
+  |---|---|---|
+  | Mega Menu Links Content | `#zona-mega-links` | band peta isi laporan (Zona 1) |
+  | Top Featured Area | `#zona-top-featured` | band sorotan utama (Zona 2) |
+  | Magazine Widget Area | `#zona-magazine-widgets` | band widget majalah (Zona 3) |
+  | Sidebar Area | `#zona-sidebar` | rail kiri: label & daftar isi (Zona 4a) |
+  | Sidebar Tab Area | `#zona-sidebar-tab` | panel 10 tab lompat bab (Zona 5) |
+  | Sidebar Area · Widget Laporan | `#zona-sidebar-widgets` | sidebar kanan: artikel terkait & populer (Zona 4b) |
+  | Footer Area | `#zona-footer` | kaki halaman (Zona 6) |
+  | Author Profile Area | `#zona-author` | kartu profil penulis (Zona 7) |
+- **Anchor zona ditambahkan ke `analisa-papua.html`** (`id="zona-*"` pada 8 elemen zona) **tanpa mengubah sedikit pun isi artikel** — tidak ada kata, bab, tabel, atau iklan yang bergeser.
+- **Panel desktop, menu mobile, dan footer**: panel muncul lewat hover/klik seperti panel mega lain; ditambahkan juga grup akordeon **"Tata Letak"** di menu mobile (7 tautan) dan **baris tautan "Tata Letak" di footer seluruh 15 halaman** (`.footer-zn`, 7 chip tautan + tautan ke halaman laporan).
+- **Tetap berfungsi tanpa JavaScript**: panel adalah markup biasa dan setiap tautan `#zona-*` berfungsi sebagai anchor normal; ditambah `scroll-margin-top: 96px` di CSS agar header sticky tidak menutupi judul zona.
+- **CSS baru (`css/magazine.css` bagian v26, aditif murni)**: `scroll-margin-top` untuk 8 anchor zona, animasi `rwpZonePing` (penanda singkat saat zona dituju), aksen emas pada judul kolom panel `#panel-tataletak`, dan gaya `.footer-zn` — konsisten **merah–hitam–emas** di mode terang, gelap manual, dan gelap otomatis. `prefers-reduced-motion` mematikan animasi penanda.
+- **JS baru (`js/magazine.js` bagian v26)**: blok `RWPZones` menambahkan offset gulir header sticky (96px desktop / 80px mobile), penanda zona, dan penyesuaian bila halaman dibuka langsung dengan hash `#zona-*`. **Tanpa JavaScript** tidak ada yang hilang.
+- **Verifikasi**: 15/15 halaman tag seimbang, CSS `778/778` & `735/735`, `node --check` bersih untuk kedua berkas JS, **5.578 referensi lokal diperiksa → 0 tautan menggantung**, meta AdSense & skrip AdSense tepat **1×** di setiap halaman, seluruh **8 anchor `#zona-*`** pada tiap halaman resolut ke `id` nyata, dan tidak ada animasi/transisi baru yang mengabaikan `prefers-reduced-motion`.
+- **Cache-buster dinaikkan ke `?v=26`** di seluruh 15 halaman (**63 referensi**, tanpa sisa `?v=25`).
+
 ## Baru di v25 — Tata Letak Berbasis Zona pada `analisa-papua.html`
 
 - **`analisa-papua.html` disusun ulang mengikuti zonasi tata letak pada 4 gambar referensi** — bukan sekadar mirip, melainkan urutan zona yang sama:
