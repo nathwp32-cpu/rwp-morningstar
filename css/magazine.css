@@ -522,3 +522,30 @@
 [data-theme=dark] .card .num{color:transparent;-webkit-text-stroke:1px #ff7a63}
 [data-theme=dark] .f-chip.active,[data-theme=dark] .f-chip.active .tag,[data-theme=dark] .f-chip.active span{color:#fff}
 /* ==== AKHIR MODE GELAP OTOMATIS ==== */
+
+/* ===== v21 — KONTROL TEMA TIGA-MODE (Otomatis / Terang / Gelap) =====
+   Segmented control ringkas di header (menggantikan tombol dua-mode).
+   Bawaan "Otomatis" mengikuti prefers-color-scheme; "Terang"/"Gelap"
+   mengunci tema manual. Tombol sengaja TIDAK diwarnai oleh mode: label
+   tetap terbaca di palet terang maupun gelap. Cetak selalu disembunyikan. */
+.theme-seg{display:inline-flex;align-items:stretch;gap:2px;background:#0000004d;border:1px solid var(--line);border-radius:9px;padding:2px;height:40px}
+.theme-seg .ts-btn{display:inline-flex;align-items:center;gap:.26rem;background:transparent;border:1px solid transparent;color:#b9b3aa;font-family:var(--font);font-size:.68rem;font-weight:800;letter-spacing:.03em;padding:0 .5rem;border-radius:7px;cursor:pointer;transition:background .2s,color .2s,border-color .2s;white-space:nowrap}
+.theme-seg .ts-btn:hover{color:var(--gold);background:#ffffff12}
+.theme-seg .ts-btn.active{background:var(--red);border-color:var(--red);color:#fff}
+.theme-seg .ts-btn.active:hover{background:var(--red-dark);color:#fff}
+.theme-seg .ts-btn:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+.theme-seg .ts-tx{font-size:.66rem;line-height:1}
+@media(max-width:1500px){.theme-seg{height:36px}.theme-seg .ts-btn{padding:0 .4rem;font-size:.62rem}.theme-seg .ts-tx{font-size:.6rem}}
+@media(max-width:1420px){.theme-seg .ts-tx{display:none}.theme-seg .ts-btn{padding:0 .42rem}}
+@media(max-width:1180px){.theme-seg{height:32px}.theme-seg .ts-btn{padding:0 .34rem;font-size:.85rem}}
+@media(max-width:1040px){.theme-seg{display:none}}
+/* Menu mobile: header menyembunyikan kontrol tema, jadi kontrol yang sama
+   disediakan di dalam menu akordeon agar pengguna ponsel tetap bisa memilih. */
+.theme-seg-mn{display:none}
+@media(max-width:1040px){
+  .mobile-nav .theme-seg-mn{display:inline-flex;height:auto;background:#ffffff14;border-color:#ffffff2e;padding:3px;margin:.5rem .6rem .7rem;align-self:center}
+  .mobile-nav .theme-seg-mn .ts-btn{padding:.42rem .78rem;font-size:.8rem;gap:.36rem}
+  .mobile-nav .theme-seg-mn .ts-btn .ts-tx{display:inline;font-size:.78rem}
+  .mobile-nav .theme-seg-mn .ts-btn.active{color:#fff}
+}
+@media print{.theme-seg{display:none!important}}

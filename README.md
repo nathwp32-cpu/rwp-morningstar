@@ -33,6 +33,15 @@ Platform kajian **Marxisme Ilmiah** dan **Sosialisme Ilmiah** dengan analisis st
 - **Aturan cetak**: `.sw.sw-rel` disembunyikan saat dicetak (sidebar memang tidak dicetak), jadi gaya cetak selektif tetap rapi.
 - **Cache-buster dinaikkan ke `?v=19`** di seluruh halaman (tanpa sisa `?v=18`).
 
+## Baru di v21 — Kontrol Tema Tiga-Mode (Otomatis / Terang / Gelap)
+- **Toggle dua-mode digantikan kontrol tiga-mode** di header seluruh 9 halaman: **segmented control** dengan tiga tombol — **🌗 Otomatis**, **☀️ Terang**, **🌙 Gelap**. Terlihat kompak di header (label teks; pada ≤1420px menyusut jadi ikon saja, dan pada ≤1040px bersembunyi karena header mobile memakai menu akordeon — pengaturan tema yang tersimpan tetap berlaku).
+- **Bawaan untuk pengguna baru adalah "Otomatis"** — mengikuti `prefers-color-scheme` sistem, tanpa preferensi tersimpan yang memaksa terang/gelap. **"Terang"/"Gelap"** mengunci tema manual (dipasang sebagai atribut `data-theme` pada `<html>`, selalu menang atas sistem).
+- **Kembali ke "Otomatis" menghapus preferensi tersimpan**, sehingga halaman langsung mengikuti sistem lagi — termasuk saat pengaturan sistem berubah **tanpa reload** (listener `matchMedia` dipasang di `<head>` *dan* di `js/main.js`).
+- **Kompatibel & migrasi dari versi dua-mode:** kunci penyimpanan tetap **`rwp-theme`**; nilai lama `"light"`/`"dark"` tetap terbaca sebagai mode manual, nilai tak dikenal diabaikan (dianggap Otomatis).
+- **Tanpa kedipan tema (pre-paint):** skrip kecil di `<head>` menetapkan tema + penanda `data-theme-set` (`manual`/`auto`) **sebelum** cat pertama; CSS hanya mengaktifkan mode gelap otomatis saat `html:not([data-theme])`, jadi tidak pernah ada flash terang→gelap.
+- **Aksesibilitas:** `role="group"` + `aria-label` pada kontrol, `aria-pressed` akurat per tombol, tombol ber-`type="button"`, dan fokus keyboard dengan `:focus-visible` (garis emas).
+- **Cache-buster dinaikkan ke `?v=21`** di seluruh halaman (tanpa sisa `?v=20`).
+
 ## Baru di v20 — Mode Gelap Otomatis (prefers-color-scheme)
 - **Seluruh 9 halaman otomatis mengikuti pengaturan tema sistem pengguna** lewat `@media (prefers-color-scheme: dark)` — tanpa perlu tombol dan tanpa menyimpan preferensi baru.
 - **Atribut `<html data-theme="light">` yang sebelumnya di-hardcode dilepas.** Tema awal kini ditentukan preferensi sistem; **skrip pre-paint** kecil di `<head>` hanya *membaca* kunci `localStorage` yang sudah ada agar pilihan manual tidak berkedip saat halaman dimuat.
@@ -115,7 +124,7 @@ Platform kajian **Marxisme Ilmiah** dan **Sosialisme Ilmiah** dengan analisis st
 
 ## Fitur
 - Tema merah-hitam-emas dengan aksen pita Bintang Kejora
-- Mode gelap/terang (tersimpan di localStorage)
+- **Kontrol tema tiga-mode** Otomatis / Terang / Gelap di header (bawaan Otomatis; manual menang atas sistem; tersimpan di localStorage `rwp-theme`)
 - Slider hero (putar otomatis + jeda/putar manual) + slider YouTube Papua Berbicara
 - Kotak pencarian (search modal) untuk seluruh bagian
 - Desain responsif mobile-first (uji 390px & 1440px)

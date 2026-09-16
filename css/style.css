@@ -83,7 +83,7 @@
 .article .callout{background:linear-gradient(120deg,var(--red-deep),var(--red));color:#fff;border-radius:var(--radius);padding:1.6rem 1.8rem;margin:1.8rem 0}
 .article .callout h4{color:#fff;margin-bottom:.5rem}
 .article .callout p{color:#f3d9d4;margin-bottom:0}
-.article .callout.gold{background:linear-gradient(120deg,#8a6a1f,var(--gold));color:var(--black)}
+.article .callout.gold{background:linear-gradient(120deg,#c99a2e,var(--gold-light));color:var(--black)}
 .article .callout.gold h4{color:var(--black)}
 .article .callout.gold p{color:#3a2f12}
 .article .figure{margin:1.8rem 0;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-lg)}
