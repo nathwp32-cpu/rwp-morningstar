@@ -388,3 +388,158 @@
     showPanel: showPanel
   };
 })();
+
+/* =====================================================================
+   RWP v24 — FILTER GLOSARIUM (glosarium.html)
+   Menyaring entri langsung saat mengetik. Progresif: tanpa JavaScript,
+   tidak ada satu pun entri yang disembunyikan di HTML — seluruh 94
+   istilah tetap tampil lengkap dan dapat dibaca.
+   Berjalan sendiri (guard: berhenti bila #glosInput tidak ada).
+   ===================================================================== */
+(function () {
+  "use strict";
+
+  var doc = document;
+  var input = doc.getElementById("glosInput");
+  if (!input) return;
+
+  var items = Array.prototype.slice.call(doc.querySelectorAll("[data-glos-item]"));
+  if (!items.length) return;
+
+  var secs = Array.prototype.slice.call(doc.querySelectorAll("[data-glos-sec]"));
+  var chips = Array.prototype.slice.call(doc.querySelectorAll(".glos-chip"));
+  var out = doc.getElementById("glosCount");
+  var reset = doc.getElementById("glosReset");
+  var box = doc.getElementById("glosFilter");
+  var total = items.length;
+  var cat = "all";
+
+  /* indeks teks sekali saja (data-glos dari server; cadangan: textContent) */
+  items.forEach(function (el) {
+    var d = el.getAttribute("data-glos");
+    if (!d) d = el.textContent || "";
+    el.__q = d.toLowerCase();
+  });
+
+  function render() {
+    var q = (input.value || "").trim().toLowerCase();
+    var shown = 0;
+    items.forEach(function (el) {
+      var ok = (cat === "all" || el.getAttribute("data-cat") === cat) &&
+               (!q || el.__q.indexOf(q) !== -1);
+      if (ok) { el.removeAttribute("hidden"); shown++; }
+      else { el.setAttribute("hidden", ""); }
+    });
+    secs.forEach(function (sec) {
+      var any = sec.querySelector("[data-glos-item]:not([hidden])");
+      if (any) sec.removeAttribute("hidden");
+      else sec.setAttribute("hidden", "");
+    });
+    if (out) {
+      out.innerHTML = shown
+        ? "Menampilkan <b>" + shown + "</b> dari " + total + " istilah" +
+          (cat === "all" ? "" : " &middot; kategori " + cat)
+        : "Tidak ada istilah yang cocok dengan <b>\u201c" + (input.value || "").replace(/[<>&]/g, "") + "\u201d</b> — coba kata kunci lain (mis. <i>sentralisme</i>, <i>front</i>, <i>nilai lebih</i>) atau tekan <b>Tampilkan semua</b>.";
+    }
+    if (box) box.setAttribute("data-glos-shown", String(shown));
+    chips.forEach(function (c) {
+      var on = c.getAttribute("data-glos-cat") === cat;
+      c.classList.toggle("active", on);
+      c.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+  }
+
+  chips.forEach(function (c) {
+    c.setAttribute("aria-pressed", "false");
+    c.addEventListener("click", function () {
+      cat = c.getAttribute("data-glos-cat") || "all";
+      render();
+    });
+  });
+
+  input.addEventListener("input", render);
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { input.value = ""; cat = "all"; render(); }
+  });
+  if (reset) reset.addEventListener("click", function () {
+    input.value = ""; cat = "all"; render(); input.focus();
+  });
+
+  render();
+
+  /* ekspos kecil untuk pengujian */
+  window.RWPGlos = {
+    count: function () { return doc.querySelectorAll("[data-glos-item]:not([hidden])").length; },
+    total: total,
+    render: render
+  };
+})();
+
+/* =====================================================================
+   v25 — SIDEBAR TAB AREA (zona tata letak, ref2)
+   Menyorot tab yang sesuai dengan posisi gulir, dan mengizinkan navigasi
+   papan tuts (panah / Home / End). Tanpa JavaScript seluruh tab tetap
+   tampil dan tetap berfungsi sebagai tautan biasa (tanpa sorotan).
+   ===================================================================== */
+(function () {
+  "use strict";
+
+  var doc = document;
+  var box = doc.querySelector("[data-stab]");
+  if (!box) return;
+
+  var tabs = Array.prototype.slice.call(box.querySelectorAll("a[data-stab-link]"));
+  if (!tabs.length) return;
+
+  var targets = tabs.map(function (a) {
+    var id = (a.getAttribute("href") || "").replace(/^#/, "");
+    return { a: a, el: id ? doc.getElementById(id) : null };
+  }).filter(function (t) { return !!t.el; });
+
+  function setActive(t) {
+    tabs.forEach(function (a) {
+      var on = a === t.a;
+      a.classList.toggle("active", on);
+      if (on) { a.setAttribute("aria-current", "true"); } else { a.removeAttribute("aria-current"); }
+    });
+  }
+
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var y = window.pageYOffset + 150;
+    var cur = null;
+    targets.forEach(function (t) { if (t.el.offsetTop <= y) cur = t; });
+    if (!cur) cur = targets[0];
+    setActive(cur);
+  }
+  function onScroll() {
+    if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  update();
+
+  /* papan tuts: panah kiri/kanan, Home, End di antara tab */
+  box.addEventListener("keydown", function (e) {
+    var i = tabs.indexOf(doc.activeElement);
+    if (i === -1) return;
+    var to = null;
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") { to = tabs[(i + 1) % tabs.length]; }
+    else if (e.key === "ArrowLeft" || e.key === "ArrowUp") { to = tabs[(i - 1 + tabs.length) % tabs.length]; }
+    else if (e.key === "Home") { to = tabs[0]; }
+    else if (e.key === "End") { to = tabs[tabs.length - 1]; }
+    if (to) { e.preventDefault(); to.focus(); }
+  });
+
+  box.setAttribute("data-stab-ready", "true");
+
+  window.RWPStab = {
+    count: tabs.length,
+    active: function () {
+      var a = box.querySelector("a.active");
+      return a ? a.getAttribute("href") : null;
+    }
+  };
+})();

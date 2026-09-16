@@ -2,8 +2,42 @@
 
 Platform kajian **Marxisme Ilmiah** dan **Sosialisme Ilmiah** dengan analisis struktural mendalam atas **West Papua**.
 
+## Baru di v25 — Tata Letak Berbasis Zona pada `analisa-papua.html`
+
+- **`analisa-papua.html` disusun ulang mengikuti zonasi tata letak pada 4 gambar referensi** — bukan sekadar mirip, melainkan urutan zona yang sama:
+
+  | Zona | Nama zona (sesuai referensi) | Isi |
+  |---|---|---|
+  | 1 | **Mega Links Konten** | band **4 kolom**: peta isi laporan khusus (20 bab + glosarium) |
+  | 2 | **Top Featured Area** | band sorotan + kartu utama Grasberg + 3 kartu pendukung + chip lanjutan |
+  | 3 | **Magazine Widget Area** | band penuh + baris 3 kartu gadget + grid 4 widget majalah |
+  | 4 | **Sidebar Area (kiri & kanan)** | shell **3 kolom**: rail kiri sempit + kolom konten + sidebar kanan |
+  | 5 | **Sidebar Tab Area** | tab lompat cepat ke 10 bab, di dalam sidebar kanan |
+  | 6 | **Footer Area** | band + baris 4 kartu gadget + grid 4 kolom + baris bawah |
+  | 7 | **Author Profile Area** | band + kartu profil penulis |
+
+- **Seluruh isi artikel dipertahankan 100%**: teks artikel **identik kata-per-kata** dengan versi sebelumnya (**3.978 kata**, 20 bab termasuk subbab 11.1/11.2), seluruh **20 anchor `#`** halaman tetap utuh, dan seluruh **7 unit iklan AdSense** dipindahkan verbatim (tidak ada slot yang hilang).
+- **CSS baru (`css/magazine.css` bagian v25)**: `.z3col` (grid 3 kolom `206px / 1fr / 320px`), `.zn-head--mega/--feat/--wid/--side/--tab/--foot/--auth` (tujuh varian band berwarna, tetap dalam keluarga **merah–hitam–emas**), `.mega-band` (grid 4 kolom), `.stab-tabs` (tab area), `.gadget` (kartu judul + label + tombol aksi) dan `.gadget-grid`, `.zn-foot-strip`, `.zn-body`. Responsif pada 1180/1040/900/680px; **mode gelap** (manual `[data-theme=dark]` dan otomatis `@media (prefers-color-scheme: dark)`) serta **aturan cetak** tersendiri; **`prefers-reduced-motion`** juga menonaktifkan transisi zona baru.
+- **JS baru (`js/magazine.js` bagian v25)**: **Sidebar Tab Area** menyorot tab yang sesuai dengan posisi gulir dan mendukung navigasi papan tuts (panah, Home, End). **Tanpa JavaScript** seluruh tab tetap tampil dan tetap berfungsi sebagai tautan biasa.
+- **Kontrol tema tiga-mode, mode gelap otomatis, `prefers-reduced-motion`, slider hero & YouTube, FAQ 30 pertanyaan, forum, galeri + lightbox, blok Artikel Terkait 6 kartu, widget sidebar 3 kartu, `ads.txt`, `netlify.toml`, `robots.txt`, dan `sitemap.xml` tetap berfungsi** pada halaman baru.
+- **Cache-buster dinaikkan ke `?v=25`** di seluruh 15 halaman (tanpa sisa `?v=25`).
+
+## Baru di v24 — Halaman Glosarium: Partai, Organisasi & Front
+- **Halaman baru: `glosarium.html` — Glosarium Istilah** berisi **94 entri** dalam **7 kategori**: **A. Partai** (21), **B. Organisasi** (10), **C. Front & Aliansi** (10), **D. Strategi & Taktik** (11), **E. Kelas & Ekonomi** (17), **F. Negara & Revolusi** (8), dan **G. Nasional & Kolonial** (10).
+- **Setiap entri memuat empat hal**: (1) **istilah** Indonesia + padanan asing bila ada (mis. *sentralisme demokratis / democratic centralism*), (2) **definisi ringkas** 1–2 kalimat, (3) **penjelasan** 1–2 paragraf yang kritis, dan (4) **asal-usul/sumber teoretis** (Marx & Engels, Lenin, Rosa Luxemburg, Gramsci, Mao, Stalin) serta **rujukan silang** ke halaman materi di situs.
+- **Seluruh istilah wajib dari permintaan tersedia**: sentralisme demokratis, vanguard (detasemen depan), blok historis, partai massa, partai kader, sel, komite, fraksi & hak minoritas, kritik-diri, kaderisasi, intelektual organik, hegemoni, pangeran modern, garis massa, spontanitas massa, kesadaran kelas (dalam diri vs untuk diri), kelas dalam diri / kelas untuk diri, front taktis, front strategis, front bersatu, front populer, front nasional-demokratik, aliansi kelas, kawan dan lawan, kontradiksi utama & sekunder, oportunisme, sektarianisme, revisionisme, reformisme, dogmatisme, birokratisasi & degenerasi partai, revolusi berkelanjutan, tahapan revolusi (demokratik vs sosialis), hak menentukan nasib sendiri, bangsa tertindas & bangsa penindas, kolonialisme internal, imperialisme, borjuasi komprador, surplus value (nilai lebih), mode produksi & formasi sosial, materialisme historis, materialisme dialektis, sosialisme ilmiah, sosialisme utopis, negara dan revolusi, diktatur proletariat, fase transisi, dan kerja reproduksi sosial — ditambah **istilah pelengkap** (kongres partai, kesadaran palsu, organisasi adat, aksi massal, tuntutan transisional, alat produksi, kelas pekerja, borjuasi nasional, kapitalisme ekstraktif, enklave ekstraktif, kelas menengah birokratik, aparatus represif, demokrasi borjuis, dewan (soviet), penghapusan negara, kriteria bangsa, nasionalisme revolusioner, referendum penentuan nasib sendiri, diskriminasi struktural, front buruh–tani, persatuan aksi, disiplin partai, kontrol dari bawah, perang rakyat, propaganda & agitasi, internasionalisme proletar, perjuangan kelas, basis & superstruktur).
+- **Navigasi antar entri**: **Daftar Isi bertaut** di atas halaman (10 entri: filter, 7 kategori, tabel peta istilah), **kotak pencarian/filter JavaScript** yang menyaring entri **langsung saat mengetik** tanpa reload (plus chip 7 kategori, tombol *Tampilkan semua*, `aria-live` pada penghitung, `role="search"`), dan **tabel "Istilah ↔ Halaman Terkait"** berisi **27 baris** yang menautkan ke `partai-organisasi-revolusioner.html`, `front-taktis-strategis.html`, `sosialisme-ilmiah.html`, `hak-menentukan-nasib-sendiri-papua.html`, `analisa-marxisme-papua.html`, `marxisme.html`, `sosialisme.html`, dan `sosialisme-papua.html`.
+- **Progresif tanpa JavaScript**: semua 94 entri **tetap tampil lengkap** di HTML — tidak ada satu pun yang disembunyikan; kotak filter hanya jalan pintas. Setiap istilah juga punya **tautan langsung** (`#entri-<slug>`, tombol `#` saat hover) agar dapat dirujuk.
+- **Seluruh fitur situs dibawa utuh**: header + mega menu, menu mobile akordeon, **kontrol tema tiga-mode**, penghormatan `prefers-reduced-motion`, sidebar sticky (Daftar Isi + **widget Artikel Terkait 3 kartu** + Terbaru + iklan + Terpopuler + Kategori + Jelajahi Topik), **blok Artikel Terkait 6 kartu**, tombol berbagi & cetak, **5 unit iklan AdSense** (atas, sidebar, bawah, multiplex), profil penulis, dan footer multi-kolom.
+- **Gaya glosarium baru di `css/magazine.css`**: kartu entri beraksen merah–emas, badge kategori, goresan `Sumber`/`Rujukan silang`, chip kategori, kotak filter, tabel peta istilah, **dukungan mode gelap** (manual `[data-theme=dark]` dan otomatis `@media (prefers-color-scheme: dark)` dengan `html:not([data-theme])`), responsif ≤680px, serta aturan cetak tersendiri.
+- **Filter glosarium berbasis JavaScript** ditambahkan ke `js/magazine.js` (bagian v24) — dijalankan sendiri dan berhenti tanpa efek bila `#glosInput` tidak ada, sehingga halaman lain tidak terpengaruh.
+- **Navigasi situs diperbarui di seluruh 15 halaman**: **mega menu** panel Teori & Metode + Analisis Papua masing-masing bertambah tautan glosarium, **menu mobile** bertambah 1 tautan, dan **footer** (kolom Navigasi + Sumber Belajar) bertambah 2 tautan.
+- **Kartu glosarium ditambahkan** ke **widget Artikel Terkait sidebar (3 kartu)** dan **blok Artikel Terkait (6 kartu)** pada **7 halaman materi** (`partai-organisasi-revolusioner`, `front-taktis-strategis`, `sosialisme-ilmiah`, `hak-menentukan-nasib-sendiri-papua`, `analisa-marxisme-papua`, `marxisme`, `sosialisme`) — kartu terakhir digantikan kartu glosarium agar invarian **3 kartu sidebar / 6 kartu blok** tetap terjaga.
+- **`sitemap.xml` diperbarui** menjadi **15 URL** dan **README ini** memuat daftar halaman baru.
+- **Cache-buster dinaikkan ke `?v=25`** di seluruh 15 halaman (tanpa sisa `?v=23`).
+
 ## Baru di v23 — Lima Halaman Materi Teori Baru (Partai, Organisasi, Front, Sosialisme Ilmiah, Penentuan Nasib Sendiri)
-Situs kini berisi **14 halaman** (9 lama + 5 baru). Seluruh **tujuh materi** yang diminta tersedia lengkap dan saling tertaut:
+Situs kini berisi **15 halaman** (9 lama + 5 baru + glosarium). Seluruh **tujuh materi** yang diminta tersedia lengkap dan saling tertaut:
 
 | Halaman baru | Materi | Bagian (jangkauan isi) |
 |---|---|---|
@@ -156,7 +190,7 @@ Situs kini berisi **14 halaman** (9 lama + 5 baru). Seluruh **tujuh materi** yan
 - Kotak pencarian (search modal) untuk seluruh bagian
 - Desain responsif mobile-first (uji 390px & 1440px)
 - Animasi reveal saat scroll, progress bar, tombol kembali ke atas
-- **14 halaman**: Beranda, Marxisme, Sosialisme, **Anti Seksisme & Patriarki**, Analisa West Papua, Sosialisme Papua, **Galeri Foto Perjuangan**, FAQ (30 pertanyaan), Forum Diskusi — ditambah **5 halaman materi teori baru (v23)**: Partai & Organisasi Revolusioner, Front Taktis & Strategis, Sosialisme Ilmiah (Metode), Hak Menentukan Nasib Sendiri, dan Analisa Marxisme Papua
+- **15 halaman**: Beranda, Marxisme, Sosialisme, **Anti Seksisme & Patriarki**, Analisa West Papua, Sosialisme Papua, **Galeri Foto Perjuangan**, FAQ (30 pertanyaan), Forum Diskusi — ditambah **5 halaman materi teori baru (v23)**: Partai & Organisasi Revolusioner, Front Taktis & Strategis, Sosialisme Ilmiah (Metode), Hak Menentukan Nasib Sendiri, dan Analisa Marxisme Papua — serta **halaman glosarium (v24)** dengan 94 istilah dalam 7 kategori
 - **Galeri foto** dengan lightbox (tombol panah & Esc), filter 6 kategori, kronologi bergambar, dan tabel status gambar
 - Forum dengan balasan, pencarian, filter tag, pengurutan (terbaru/terpopuler/terbanyak dibalas), penghitung tampilan, penanda tersemat, tombol dukung, dan ekspor JSON/CSV
 - **Monetisasi Google AdSense** (Publisher ID `ca-pub-6557428036767230`)
@@ -178,6 +212,7 @@ ruang-west-papua_v12/
 ├── sosialisme-ilmiah.html                   ← baru di v23 (materi 5)
 ├── hak-menentukan-nasib-sendiri-papua.html  ← baru di v23 (materi 6)
 ├── analisa-marxisme-papua.html              ← baru di v23 (materi 7)
+├── glosarium.html                           ← baru di v24 (94 istilah, 7 kategori)
 ├── ads.txt                       ← deklarasi penjual resmi AdSense
 ├── css/style.css
 ├── css/magazine.css             ← tata letak majalah (v17)
@@ -187,7 +222,7 @@ ruang-west-papua_v12/
 ├── netlify.toml
 ├── README.md
 ├── robots.txt
-└── sitemap.xml                   ← 14 halaman
+└── sitemap.xml                   ← 15 halaman
 ```
 
 ## Deploy ke Netlify (Drag & Drop)
@@ -234,5 +269,6 @@ Ganti **`VIDEO_ID`** pada 3 tempat (`data-yt-id`, URL thumbnail, URL tonton) + j
 - Uji browser (Chromium) pada mobile 390px & desktop 1440px: slider YouTube berjalan otomatis, tombol navigasi berfungsi, tanpa scroll horizontal (`scrollX=0` di 9/9 halaman; sapuan lebar 1024–1920px pada halaman nav terpanjang juga bersih)
 - Uji galeri: filter kategori menyaring kartu, lightbox membuka/menutup dengan tombol, panah, dan Esc
 - **v23**: meta & skrip AdSense tepat sekali di **14/14 halaman**; blok "Artikel Terkait" (6 kartu) dan widget sidebar (3 kartu) ada di **14/14 halaman** dengan tautan valid; tidak ada tautan internal menggantung; uji Chromium 390px & 1440px tanpa scroll horizontal; kontrol tema tiga-mode dan penghormatan `prefers-reduced-motion` terverifikasi pada halaman baru
+- **v24**: meta & skrip AdSense tepat sekali di **15/15 halaman**; blok "Artikel Terkait" (6 kartu) dan widget sidebar (3 kartu) ada di **15/15 halaman**, dengan kartu glosarium pada 7 halaman materi; **94 entri glosarium** dalam 7 kategori dengan tautan langsung dan rujukan silang tanpa tautan menggantung; filter glosarium diuji (mengetik menyaring, menghapus memulihkan, kategori menyaring, tanpa JavaScript seluruh entri tetap tampil); uji Chromium 390px & 1440px tanpa scroll horizontal di seluruh halaman
 
 © 2026 Ruang West Papua (RWP) — konten bebas disebarluaskan untuk pendidikan.
