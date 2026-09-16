@@ -2,6 +2,17 @@
 
 Platform kajian **Marxisme Ilmiah** dan **Sosialisme Ilmiah** dengan analisis struktural mendalam atas **West Papua**.
 
+## Baru di v22 — Hormati `prefers-reduced-motion` (slider hero & slider YouTube)
+- **Autoplay slider hero dan slider YouTube berhenti otomatis** saat pengguna mengaktifkan **"Kurangi gerakan" / reduce motion** di sistem. Tidak ada tombol baru, tidak ada preferensi tersimpan — perilaku murni mengikuti pengaturan sistem.
+- **Transisi perpindahan slide dibuat instan** (`transition:none`) pada mode tersebut — slide langsung pindah, tanpa animasi geser.
+- **Navigasi manual tetap berfungsi penuh**: tombol prev/next, titik indikator, pemilihan slide YouTube, tombol putar, dan pemutaran video — semuanya tetap bisa dipakai.
+- **Perubahan pengaturan sistem diikuti tanpa reload.** Listener `matchMedia('(prefers-reduced-motion: reduce)')` dipasang di `js/main.js` sebagai satu sumber kebenaran (`RWP_RM`): begitu pengguna menyalakan opsi tersebut, autoplay yang sedang berjalan **langsung berhenti**; begitu dimatikan, autoplay **langsung berjalan kembali** — termasuk saat slider sedang terlihat.
+- **Animasi lain ikut dijinakkan**: animasi masuk `.reveal` langsung tampil (tanpa `IntersectionObserver` menunggu), transisi hover berat dinonaktifkan (nilai akhir visual tetap sama), dan `scroll-behavior` menjadi instan — **tanpa mengubah tampilan statis**.
+- **Status dijelaskan pada UI**: label slider YouTube berbunyi *"Autoplay dimatikan — pengaturan sistem 'Kurangi gerakan' aktif"*, dan tombol putar hero menampilkan status dijeda (`aria-pressed="true"`).
+- Penanda uji `data-reduced-motion="reduce|no-preference"` dipasang pada `<html>`.
+- **Cache-buster dinaikkan ke `?v=22`** di seluruh halaman (tanpa sisa `?v=21`).
+- Aturan reduced-motion ditulis di **kedua berkas CSS** (`style.css` dan `magazine.css`) agar perilaku tetap benar walau salah satu berkas masih tersimpan di cache lama.
+
 ## Baru di v18 — Widget "Artikel Terkait"
 - **Blok "Artikel Terkait" di seluruh 9 halaman** (`index`, `marxisme`, `sosialisme`, `analisa-papua`, `sosialisme-papua`, `anti-seksisme-patriarki`, `galeri-foto`, `faq`, `forum`), ditempatkan **setelah seluruh isi artikel/konten utama dan sebelum iklan penutup** — 6 kartu per halaman (**54 kartu** total).
 - **Rekomendasi mengikuti kategori halaman**, bukan template seragam: halaman teori merekomendasikan teori lain, halaman analisis merekomendasikan analisis lain, halaman perempuan merekomendasikan konten perempuan & sosial, halaman galeri merekomendasikan galeri & arsip visual.

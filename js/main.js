@@ -26,7 +26,24 @@ const modeBtns=Array.prototype.slice.call(document.querySelectorAll("[data-theme
 function paintUI(){const m=currentMode();modeBtns.forEach(function(b){const on=b.getAttribute("data-theme-mode")===m;b.setAttribute("aria-pressed",on?"true":"false");b.classList.toggle("active",on)})}
 applyMode(currentMode(),false);paintUI();
 if(mqDark){const onMQ=function(){applyMode(currentMode(),false);paintUI()};mqDark.addEventListener?mqDark.addEventListener("change",onMQ):(mqDark.addListener&&mqDark.addListener(onMQ))}
-modeBtns.forEach(function(b){b.addEventListener("click",function(){applyMode(b.getAttribute("data-theme-mode")||"auto",true);paintUI()})});const hamburger=document.getElementById("hamburger"),mobileNav=document.getElementById("mobileNav"),closeMnav=document.getElementById("closeMnav");function toggleMnav(open){mobileNav&&(open?mobileNav.classList.add("open"):mobileNav.classList.remove("open"))}hamburger&&hamburger.addEventListener("click",function(){toggleMnav(!0)}),closeMnav&&closeMnav.addEventListener("click",function(){toggleMnav(!1)}),mobileNav&&mobileNav.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){toggleMnav(!1)})});const revealEls=document.querySelectorAll(".reveal");if("IntersectionObserver"in window){const io=new IntersectionObserver(function(entries){entries.forEach(function(e){e.isIntersecting&&(e.target.classList.add("visible"),io.unobserve(e.target))})},{threshold:.12});revealEls.forEach(function(el,i){el.style.transitionDelay=i%4*.06+"s",io.observe(el)})}else revealEls.forEach(function(el){el.classList.add("visible")});const scrollTop=document.getElementById("scrollTop"),progressBar=document.getElementById("progressBar"),sections=Array.prototype.slice.call(document.querySelectorAll("section[id]")),navLinks=Array.prototype.slice.call(document.querySelectorAll(".nav a[href^='#']"));function onScroll(){const y=window.scrollY||document.documentElement.scrollTop;if(scrollTop&&scrollTop.classList.toggle("show",y>500),progressBar){const h=document.documentElement.scrollHeight-window.innerHeight;progressBar.style.width=(h>0?y/h*100:0)+"%"}let currentId="";sections.forEach(function(s){y>=s.offsetTop-140&&(currentId=s.id)}),navLinks.forEach(function(l){l.classList.toggle("active",l.getAttribute("href")==="#"+currentId)})}window.addEventListener("scroll",onScroll,{passive:!0}),onScroll(),scrollTop&&scrollTop.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})});const searchBtn=document.getElementById("searchBtn"),searchModal=document.getElementById("searchModal"),searchInput=document.getElementById("searchInput"),searchClose=document.getElementById("searchClose"),searchResults=document.getElementById("searchResults"),searchIndex=Array.prototype.slice.call(document.querySelectorAll("section[id]")).map(function(s){return{id:s.id,title:(s.querySelector("h2")||s.querySelector("h3")||{}).textContent||s.id,text:(s.textContent||"").slice(0,1200).toLowerCase()}});function runSearch(q){if(!searchResults)return;if(q=q.trim().toLowerCase(),searchResults.innerHTML="",q.length<2){searchResults.innerHTML='<div style="color:var(--muted);padding:.6rem 0;font-size:.9rem">Ketik minimal 2 huruf untuk mencari…</div>';return}const hits=searchIndex.filter(function(s){return s.title.toLowerCase().indexOf(q)!==-1||s.text.indexOf(q)!==-1}).slice(0,8);if(!hits.length){searchResults.innerHTML='<div style="color:var(--muted);padding:.6rem 0;font-size:.9rem">Tidak ditemukan. Coba kata kunci lain (mis. “dialektika”, “nilai lebih”, “PEPERA”).</div>';return}hits.forEach(function(h){const a=document.createElement("a");a.href="#"+h.id,a.innerHTML='<span class="sr-tag">Bagian</span><br>'+h.title,a.addEventListener("click",function(){searchModal.classList.remove("open"),searchInput.value=""}),searchResults.appendChild(a)})}searchBtn&&searchModal&&searchBtn.addEventListener("click",function(){searchModal.classList.add("open"),setTimeout(function(){searchInput&&searchInput.focus()},80)}),searchClose&&searchModal&&searchClose.addEventListener("click",function(){searchModal.classList.remove("open")}),searchInput&&(searchInput.addEventListener("input",function(){runSearch(searchInput.value)}),searchInput.addEventListener("keydown",function(e){e.key==="Escape"&&searchModal.classList.remove("open")})),searchModal&&searchModal.addEventListener("click",function(e){e.target===searchModal&&searchModal.classList.remove("open")}),document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener("click",function(e){const target=document.querySelector(a.getAttribute("href"));if(target){e.preventDefault();const top=target.getBoundingClientRect().top+window.scrollY-76;window.scrollTo({top,behavior:"smooth"})}})});
+modeBtns.forEach(function(b){b.addEventListener("click",function(){applyMode(b.getAttribute("data-theme-mode")||"auto",true);paintUI()})});const hamburger=document.getElementById("hamburger"),mobileNav=document.getElementById("mobileNav"),closeMnav=document.getElementById("closeMnav");function toggleMnav(open){mobileNav&&(open?mobileNav.classList.add("open"):mobileNav.classList.remove("open"))}hamburger&&hamburger.addEventListener("click",function(){toggleMnav(!0)}),closeMnav&&closeMnav.addEventListener("click",function(){toggleMnav(!1)}),mobileNav&&mobileNav.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){toggleMnav(!1)})});const revealEls=document.querySelectorAll(".reveal");if("IntersectionObserver"in window){const io=new IntersectionObserver(function(entries){entries.forEach(function(e){e.isIntersecting&&(e.target.classList.add("visible"),io.unobserve(e.target))})},{threshold:.12});revealEls.forEach(function(el,i){el.style.transitionDelay=i%4*.06+"s",io.observe(el)})}else revealEls.forEach(function(el){el.classList.add("visible")});const scrollTop=document.getElementById("scrollTop"),progressBar=document.getElementById("progressBar"),sections=Array.prototype.slice.call(document.querySelectorAll("section[id]")),navLinks=Array.prototype.slice.call(document.querySelectorAll(".nav a[href^='#']"));function onScroll(){const y=window.scrollY||document.documentElement.scrollTop;if(scrollTop&&scrollTop.classList.toggle("show",y>500),progressBar){const h=document.documentElement.scrollHeight-window.innerHeight;progressBar.style.width=(h>0?y/h*100:0)+"%"}let currentId="";sections.forEach(function(s){y>=s.offsetTop-140&&(currentId=s.id)}),navLinks.forEach(function(l){l.classList.toggle("active",l.getAttribute("href")==="#"+currentId)})}window.addEventListener("scroll",onScroll,{passive:!0}),onScroll(),scrollTop&&scrollTop.addEventListener("click",function(){window.scrollTo({top:0,behavior:RWP_RM.get()?"auto":"smooth"})});const searchBtn=document.getElementById("searchBtn"),searchModal=document.getElementById("searchModal"),searchInput=document.getElementById("searchInput"),searchClose=document.getElementById("searchClose"),searchResults=document.getElementById("searchResults"),searchIndex=Array.prototype.slice.call(document.querySelectorAll("section[id]")).map(function(s){return{id:s.id,title:(s.querySelector("h2")||s.querySelector("h3")||{}).textContent||s.id,text:(s.textContent||"").slice(0,1200).toLowerCase()}});function runSearch(q){if(!searchResults)return;if(q=q.trim().toLowerCase(),searchResults.innerHTML="",q.length<2){searchResults.innerHTML='<div style="color:var(--muted);padding:.6rem 0;font-size:.9rem">Ketik minimal 2 huruf untuk mencari…</div>';return}const hits=searchIndex.filter(function(s){return s.title.toLowerCase().indexOf(q)!==-1||s.text.indexOf(q)!==-1}).slice(0,8);if(!hits.length){searchResults.innerHTML='<div style="color:var(--muted);padding:.6rem 0;font-size:.9rem">Tidak ditemukan. Coba kata kunci lain (mis. “dialektika”, “nilai lebih”, “PEPERA”).</div>';return}hits.forEach(function(h){const a=document.createElement("a");a.href="#"+h.id,a.innerHTML='<span class="sr-tag">Bagian</span><br>'+h.title,a.addEventListener("click",function(){searchModal.classList.remove("open"),searchInput.value=""}),searchResults.appendChild(a)})}searchBtn&&searchModal&&searchBtn.addEventListener("click",function(){searchModal.classList.add("open"),setTimeout(function(){searchInput&&searchInput.focus()},80)}),searchClose&&searchModal&&searchClose.addEventListener("click",function(){searchModal.classList.remove("open")}),searchInput&&(searchInput.addEventListener("input",function(){runSearch(searchInput.value)}),searchInput.addEventListener("keydown",function(e){e.key==="Escape"&&searchModal.classList.remove("open")})),searchModal&&searchModal.addEventListener("click",function(e){e.target===searchModal&&searchModal.classList.remove("open")}),document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener("click",function(e){const target=document.querySelector(a.getAttribute("href"));if(target){e.preventDefault();const top=target.getBoundingClientRect().top+window.scrollY-76;window.scrollTo({top,behavior:RWP_RM.get()?"auto":"smooth"})}})});
+})();
+/* ===== v22 prefers-reduced-motion: satu sumber kebenaran =====
+   Dipakai oleh slider hero, slider YouTube, dan smooth-scroll.
+   Mengikuti perubahan pengaturan sistem TANPA reload (matchMedia listener).
+   Menandai <html data-reduced-motion="reduce|no-preference"> untuk pengujian. */
+var RWP_RM=(function(){
+  var mq=window.matchMedia?window.matchMedia("(prefers-reduced-motion: reduce)"):null;
+  var subs=[];
+  function get(){return !!(mq&&mq.matches)}
+  function emit(){
+    var v=get();
+    try{document.documentElement.setAttribute("data-reduced-motion",v?"reduce":"no-preference")}catch(e){}
+    subs.forEach(function(fn){try{fn(v)}catch(e){}});
+  }
+  if(mq){if(mq.addEventListener)mq.addEventListener("change",emit);else if(mq.addListener)mq.addListener(emit)}
+  emit();
+  return {get:get,on:function(fn){subs.push(fn)}};
 })();
 /* ===== v5 hero slider ===== */
 (function(){
@@ -38,8 +55,13 @@ modeBtns.forEach(function(b){b.addEventListener("click",function(){applyMode(b.g
   var prev=slider.querySelector("[data-slider-prev]");
   var next=slider.querySelector("[data-slider-next]");
   var playBtn=slider.querySelector("[data-slider-play]");
-  var count=slides.length,index=0,timer=null,reduced=false,manualPaused=false;
-  if("matchMedia"in window)reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var count=slides.length,index=0,timer=null,reduced=RWP_RM.get(),manualPaused=false;
+  /* v22: saat "kurangi gerakan" aktif, perpindahan slide dibuat instan (tanpa animasi) */
+  function applyMotionPref(){
+    if(!track)return;
+    track.style.transition=RWP_RM.get()?"none":"";
+    if(RWP_RM.get())track.style.transform="translateX(-"+(index*100)+"%)";
+  }
   function goTo(i){
     index=(i+count)%count;
     if(track)track.style.transform="translateX(-"+(index*100)+"%)";
@@ -51,9 +73,13 @@ modeBtns.forEach(function(b){b.addEventListener("click",function(){applyMode(b.g
     playBtn.setAttribute("aria-pressed",paused?"true":"false");
     playBtn.setAttribute("aria-label",paused?"Lanjutkan autoplay":"Jeda autoplay");
   }
-  function play(){if(reduced||manualPaused)return;stop();timer=setInterval(function(){goTo(index+1)},6000);setPlayState(false)}
+  function play(){
+    if(document.hidden)return;
+    if(reduced||manualPaused){stop();setPlayState(true);return}
+    stop();timer=setInterval(function(){goTo(index+1)},6000);setPlayState(false)
+  }
   function stop(){if(timer){clearInterval(timer);timer=null}}
-  function onVis(){document.hidden?stop():play()}
+  function onVis(){if(document.hidden||reduced)stop();else play()}
   if(prev)prev.addEventListener("click",function(){goTo(index-1);play()});
   if(next)next.addEventListener("click",function(){goTo(index+1);play()});
   dots.forEach(function(d){d.addEventListener("click",function(){goTo(parseInt(d.getAttribute("data-slider-dot"),10));play()})});
@@ -66,6 +92,12 @@ modeBtns.forEach(function(b){b.addEventListener("click",function(){applyMode(b.g
   slider.addEventListener("focusin",stop);
   slider.addEventListener("focusout",function(){if(!manualPaused)play()});
   document.addEventListener("visibilitychange",onVis);
+  /* v22: ikuti perubahan pengaturan sistem tanpa reload */
+  RWP_RM.on(function(instant){
+    reduced=instant;applyMotionPref();
+    if(instant){stop();setPlayState(true)}else if(!manualPaused){play()}
+  });
+  applyMotionPref();
   goTo(0);play();
 })();
 /* ===== v6 FAQ accordion ===== */
@@ -335,7 +367,7 @@ modeBtns.forEach(function(b){b.addEventListener("click",function(){applyMode(b.g
   "use strict";
   var roots=Array.prototype.slice.call(document.querySelectorAll("[data-yt-slider]"));
   if(!roots.length)return;
-  var reduced=!!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  var reduced=RWP_RM.get();
 
   roots.forEach(function(root){
     var track=root.querySelector("[data-yt-track]");
@@ -363,11 +395,12 @@ modeBtns.forEach(function(b){b.addEventListener("click",function(){applyMode(b.g
         toggle.setAttribute("aria-pressed",paused?"true":"false");
         toggle.textContent=paused?"\u25b6 Lanjut":"\u275a\u275a Jeda";
       }
-      if(status)status.textContent=paused?"Autoplay dijeda":"Autoplay \u00b7 bergilir otomatis";
+      if(status)status.textContent=reduced?"Autoplay dimatikan \u2014 pengaturan sistem \u201cKurangi gerakan\u201d aktif":(paused?"Autoplay dijeda":"Autoplay \u00b7 bergilir otomatis");
     }
     function stop(){if(timer){clearInterval(timer);timer=null}}
     function sync(){
       var ok=!manualPaused&&!hovering&&!offscreen&&!reduced&&!document.hidden;
+      if(reduced&&status)status.textContent="Autoplay dimatikan \u2014 pengaturan sistem \u201cKurangi gerakan\u201d aktif";
       if(ok){stop();timer=setInterval(function(){goTo(index+1)},delay)}
       else stop();
     }
@@ -404,6 +437,12 @@ modeBtns.forEach(function(b){b.addEventListener("click",function(){applyMode(b.g
     if(nextBtn)nextBtn.addEventListener("click",function(){goTo(index+1);sync()});
     dots.forEach(function(d,n){d.addEventListener("click",function(){goTo(n);sync()})});
     if(toggle)toggle.addEventListener("click",function(){
+      /* v22: saat "kurangi gerakan" aktif, autoplay tidak bisa dinyalakan paksa */
+      if(RWP_RM.get()){
+        manualPaused=true;stop();setToggle(true);
+        if(status)status.textContent="Autoplay dimatikan \u2014 pengaturan sistem \u201cKurangi gerakan\u201d aktif";
+        return;
+      }
       if(manualPaused){clearPlayers();manualPaused=false;setToggle(false)}
       else{manualPaused=true;setToggle(true)}
       sync();
@@ -427,7 +466,13 @@ modeBtns.forEach(function(b){b.addEventListener("click",function(){applyMode(b.g
       },{threshold:.2});
       io.observe(root);
     }
-    setToggle(manualPaused);
+    /* v22: ikuti perubahan pengaturan sistem tanpa reload (transisi ditangani CSS) */
+    RWP_RM.on(function(instant){
+      reduced=instant;
+      setToggle(instant?true:manualPaused);
+      sync();
+    });
+    setToggle(manualPaused||reduced);
     goTo(0);
     sync();
   });

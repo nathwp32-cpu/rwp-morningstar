@@ -549,3 +549,32 @@
   .mobile-nav .theme-seg-mn .ts-btn.active{color:#fff}
 }
 @media print{.theme-seg{display:none!important}}
+
+/* ===================================================================
+   v22 — HORMATI prefers-reduced-motion (berkas tata letak majalah)
+   Salinan aturan yang sama seperti di style.css, agar perilaku tetap
+   benar walau salah satu berkas CSS sudah tersimpan di cache lama.
+   Autoplay dihentikan oleh js/main.js (RWP_RM); transisi & animasi
+   dijinakkan lewat media query ini. Tampilan statis tidak berubah.
+   =================================================================== */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .slider-track,.yt-track,.slide-track,.slider,.slide,.yt-slide,.yt-slider{transition:none!important;animation:none!important}
+  .reveal{opacity:1!important;transform:none!important;transition:none!important}
+  .card,.analysis-item,.quote-card,.gloss-item,.split-media img,.btn,.icon-btn,.slider-btn,
+  .slider-play,.yt-nav,.yt-thumb img,.yt-play,.tl-item,.gal-card,.f-chip,
+  .mag-featured a,.mf-card,.mf-lead img,.mw-card,.sw a,.rel-card,.rel-arrow,.ap-social a,
+  .sb-btn,.swr-i,.mega-tab,.mega-col a,.menu-drop,.menu-link .caret,.mega-panel,
+  .mobile-nav,.search-modal,.toc a,#scrollTop,#progressBar,.yt-meta h3 a,
+  .article a,.footer-col ul a,.yt-dot,.dot,.yt-btn,.tag{
+    transition:none!important;animation:none!important
+  }
+  .card:hover,.analysis-item:hover,.mw-card:hover,.mf-card:hover,.rel-card:hover,.sb-btn:hover,
+  .ap-social a:hover,.btn:hover,.icon-btn:hover,.swr-i:hover{transform:none!important}
+  .split-media:hover img,.mf-lead:hover img,.yt-slide:hover .yt-thumb img{transform:none!important}
+  .yt-slide:hover .yt-play{transform:translate(-50%,-50%)!important}
+  .rel-card:hover .rel-arrow{transform:none!important}
+  .menu-item:hover>a.menu-link .caret,.menu-item.open>a.menu-link .caret{transform:rotate(180deg)!important}
+  .menu-item:hover .menu-drop,.menu-item.open .menu-drop{opacity:1!important;visibility:visible!important;transform:none!important}
+  #scrollTop,#scrollTop.show{transform:none!important}
+}
